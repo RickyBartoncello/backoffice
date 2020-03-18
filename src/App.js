@@ -2,34 +2,39 @@ import React, {PureComponent} from 'react';
 import Axios from 'axios';
 import map from 'lodash/map';
 
+const API = 'http://localhost:5000/api/';
+
+const entities = ['countries','cars','quotes','instruments'];
+
 class App extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
+      entities,
       data: [],
-      currentView: 1
+      currentView: 0
     }
   }
-  async endpoint() {
-    const {data} = await Axios.get('http://localhost:5000/api/countries');
-    this.setState(() => ({data: data, currentView: 1}));
+
+  async endPoint(entity, view){
+    console.log(entity,'entidad');
+    const {data} = await Axios.get(`${API}${entity}`);
+    this.setState(() => ({data: data, currentView: view}));
   }
 
-  async endpoint2() {
-    const {data} = await Axios.get('http://localhost:5000/api/cars');
-    this.setState(() => ({data: data, currentView: 2}));
-  }
 
   render() {
     const {data, currentView} = this.state;
     return (
      <div>
        <h3>Tabla de datos </h3>
-       <button onClick={() => this.endpoint()}> BOTONEAME Paises</button>
-       <button onClick={() => this.endpoint2()}> BOTONEAME Autos </button>
+       {map(entities, (entity, index) => (
+        <button onClick={() => this.endPoint(entity, index)}> BOTONEAME {entity}</button>
+       ))}
+       
        <hr/>
         <table>
-          {currentView === 1 && map(data, country => (
+          {currentView === 0 && map(data, country => (
             <tr key={country.id}>
               <td>
                 {country.name}
@@ -39,8 +44,7 @@ class App extends PureComponent {
               </td>
             </tr>
           ))}
-
-          {currentView === 2 && map(data, car => (
+          {currentView === 1 && map(data, car => (
             <tr key={car.id}>
               <td>
                 {car.brand}
@@ -50,6 +54,29 @@ class App extends PureComponent {
               </td>
               <td>
                 {car.year}
+              </td>
+            </tr>
+          ))}
+          {currentView === 2 && map(data, quote => (
+            <tr key={quote.id}>
+              <td>
+                {quote.text}
+              </td>
+              <td>
+                {quote.author}
+              </td>
+            </tr>
+          ))}
+          {currentView === 3 && map(data, instrument => (
+            <tr key={instrument.id}>
+              <td>
+                {instrument.hexcode}
+              </td>
+              <td>
+                {instrument.family}
+              </td>
+              <td>
+                {instrument.instrument}
               </td>
             </tr>
           ))}
