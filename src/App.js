@@ -19,7 +19,7 @@ class App extends PureComponent {
   async endPoint(entity, view){
     console.log(entity,'entidad');
     const {data} = await Axios.get(`${API}${entity}`);
-    this.setState(() => ({data: data, currentView: view}));
+    this.setState(() => ({data, currentView: view}));
   }
 
 
