@@ -40,16 +40,16 @@ class App extends PureComponent {
             </tr>
           ))}
 
-          {currentView === 2 && map(data, country => (
-            <tr key={country.id}>
+          {currentView === 2 && map(data, car => (
+            <tr key={car.id}>
               <td>
-                {country.marca}
+                {car.brand}
               </td>
               <td>
-                {country.modelo}
+                {car.model}
               </td>
               <td>
-                {country.modelo}
+                {car.year}
               </td>
             </tr>
           ))}
