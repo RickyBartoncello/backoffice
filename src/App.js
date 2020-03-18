@@ -1,86 +1,44 @@
 import React, {PureComponent} from 'react';
+import DynamicTable from './Components/DynamicTable';
+import Button from 'reactstrap/lib/Button';
 import Axios from 'axios';
 import map from 'lodash/map';
+import head from 'lodash/head';
+import keys from 'lodash/keys';
 
 const API = 'http://localhost:5000/api/';
 
-const entities = ['countries','cars','quotes','instruments'];
+const labels = ['countries','cars','quotes','instruments'];
 
 class App extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      entities,
-      data: [],
-      currentView: 0
+      entities: [],
+      entityProps: [],
+      labels,
+      selectedLabel: null
     }
   }
 
-  async endPoint(entity, view){
-    console.log(entity,'entidad');
-    const {data} = await Axios.get(`${API}${entity}`);
-    this.setState(() => ({data, currentView: view}));
+  async endPoint(label){
+    const {data} = await Axios.get(`${API}${label}`);
+    this.setState(() => ({
+      entities: data,
+      entityProps: keys(head(data)),
+      selectedLabel: label
+    }));
   }
 
-
   render() {
-    const {data, currentView} = this.state;
+    const {entities, entityProps, labels, selectedLabel} = this.state;
     return (
      <div>
-       <h3>Tabla de datos </h3>
-       {map(entities, (entity, index) => (
-        <button onClick={() => this.endPoint(entity, index)}> BOTONEAME {entity}</button>
+       {map(labels, label => (
+        <Button color="info" onClick={() => this.endPoint(label)}> BOTONEAME {label}</Button>
        ))}
-       
        <hr/>
-        <table>
-          {currentView === 0 && map(data, country => (
-            <tr key={country.id}>
-              <td>
-                {country.name}
-              </td>
-              <td>
-                {country.code}
-              </td>
-            </tr>
-          ))}
-          {currentView === 1 && map(data, car => (
-            <tr key={car.id}>
-              <td>
-                {car.brand}
-              </td>
-              <td>
-                {car.model}
-              </td>
-              <td>
-                {car.year}
-              </td>
-            </tr>
-          ))}
-          {currentView === 2 && map(data, quote => (
-            <tr key={quote.id}>
-              <td>
-                {quote.text}
-              </td>
-              <td>
-                {quote.author}
-              </td>
-            </tr>
-          ))}
-          {currentView === 3 && map(data, instrument => (
-            <tr key={instrument.id}>
-              <td>
-                {instrument.hexcode}
-              </td>
-              <td>
-                {instrument.family}
-              </td>
-              <td>
-                {instrument.instrument}
-              </td>
-            </tr>
-          ))}
-        </table>
+       <DynamicTable {...{entities, entityProps, selectedLabel}}/>
       </div>
     )
   }
