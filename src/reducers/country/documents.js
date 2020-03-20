@@ -1,7 +1,10 @@
 import {
     FETCH_COUNTRIES_SUCCEEDED,
-    FETCH_COUNTRIES_REQUESTED
-} from '../actions/country'
+    FETCH_COUNTRIES_REQUESTED,
+    SORT_COUNTRY
+} from '../../actions/country';
+
+import orderBy from 'lodash/orderBy'
 
 const initialState = {
     loading: false,
@@ -14,6 +17,15 @@ export default (state = initialState, action) => {
             return {...state, loading: true};
         case FETCH_COUNTRIES_SUCCEEDED:
             return {...state, loading: false, countries: action.countries};
+        case SORT_COUNTRY:
+            return {
+                ...state,
+                loading: false,
+                countries: orderBy(state.countries,
+                    [action.sort.id],
+                    [action.sort.sort]
+                )
+            };
         default:
             return state;
     }

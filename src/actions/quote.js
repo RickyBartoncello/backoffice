@@ -8,3 +8,6 @@ export const fetchQuotesSucceeded = quotes => ({
     type: FETCH_QUOTES_SUCCEEDED,
     quotes
 }) // Disparador o Action Creator
+
+export const SORT_QUOTES = 'SORT_QUOTES';
+export const sorQuotes = sort => ({type: SORT_QUOTES, sort});

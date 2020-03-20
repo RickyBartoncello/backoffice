@@ -9,42 +9,36 @@ import {
 import Cars from '../pages/Car';
 import Country from '../pages/Country';
 import Home from '../pages/Home';
-import Instrument from '../pages/Instrument';
+import Instruments from '../pages/Instrument';
 import Quote from '../pages/Quote';
 
 export default function BasicExample() {
     return (
-    <Router>
-        <>
-            <ul>
-                <li>
-                    <Link to="/">Home</Link>
-                </li>
-                <li>
-                    <Link to="/cars">Cars</Link>
-                </li>
-                <li>
-                    <Link to="/countries">Countries</Link>
-                </li>
-                <li>
-                    <Link to="/instruments">Instruments</Link>
-                </li>
-                <li>
-                    <Link to="/quotes">Quotes</Link>
-                </li>
-            </ul>
+        <Router>
+            <>
+                <nav>
+                    &nbsp;&nbsp;&nbsp;
+                    <Link to="/"><img src='.\home.png' width='50' height='50'></img> </Link>
+                    &nbsp;&nbsp;&nbsp;
+                    <Link to="/country"><img src='.\country.jpeg' width='100' height='50'></img></Link>
+                    &nbsp;&nbsp;&nbsp;
+                    <Link to="/cars"><img src='.\cars.jpeg' width='100' height='50'></img> </Link>
+                    &nbsp;&nbsp;&nbsp;
+                    <Link to="/instruments"><img src='.\instruments.png' width='100' height='50'></img> </Link>
+                    &nbsp;&nbsp;&nbsp;
+                     <Link to="/quotes"><img src='.\quotes.png' width='100' height='50'></img> </Link>
+                </nav>
 
-            <hr />
+                <hr />
 
-            <Switch>
-                <Route exact path="/" component={Home}/>
-                <Route path="/cars" component={Cars}/>
-                <Route path="/countries" component={Country}/>
-                <Route path="/instruments" component={Instrument}/>
-                <Route path="/quotes" component={Quote}/>
-            </Switch>
-
-        </>
-    </Router>
+                <Switch>
+                    <Route exact path="/" component={Home}/>
+                    <Route path="/cars" component={Cars}/>
+                    <Route path="/country" component={Country}/>
+                    <Route path="/instruments" component={Instruments}/>
+                    <Route path="/quotes" component={Quote}/>
+                </Switch>
+            </>
+        </Router>
     );
 }
