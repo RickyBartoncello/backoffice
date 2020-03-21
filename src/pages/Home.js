@@ -1,4 +1,3 @@
-import React from 'react';
+import React from 'react' ;
 
-
-export default () => (<div>  Nuestro Home </div>);
+export default () => (<div><img src=".\homee.jpeg" width="10000" height="50"></img></div>) 

@@ -3,8 +3,8 @@ import map from 'lodash/map';
 import get from 'lodash/get';
 
 export default ({data, columns, headers, onSort}) => (
-    <table>
-        <tr>
+    <table border="5">
+        <tr >
             {map(headers, header => (
                 <th onClick={() => onSort(header)}>
                     {header.label}

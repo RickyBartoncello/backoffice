@@ -3,15 +3,16 @@ import {
     put
 } from 'redux-saga/effects';
 
-import InstrumentAPI from '../services/instrument';
+import InstrumentAPI from '../Api/instrument';
 import {
     fetchInstrumentsSucceeded
 } from '../actions/instrument';
 
-export function* fetchInstruments() {
+export function* fetchInstruments({filter}) {
     try {
         const instruments = yield call(
-            InstrumentAPI.fetch
+            InstrumentAPI.fetch,
+            filter
         );
         yield put(
             fetchInstrumentsSucceeded(instruments)

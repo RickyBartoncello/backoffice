@@ -9,5 +9,5 @@ export const fetchInstrumentsSucceeded = instruments => ({
     instruments
 }) // Disparador o Action Creator
 
-export const SORT_INSTRUMENTS = 'SORT_INSTRUMENTS';
-export const sortnstruments = sort => ({type: SORT_INSTRUMENTS, sort});
+export const SORT_INSTRUMENT = 'SORT_INSTRUMENT';
+export const sortInstrument = sort => ({type: SORT_INSTRUMENT, sort});

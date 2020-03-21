@@ -3,15 +3,16 @@ import {
     put
 } from 'redux-saga/effects';
 
-import CarAPI from '../services/car';
+import CarAPI from '../Api/car';
 import {
     fetchCarsSucceeded
 } from '../actions/car';
 
-export function* fetchCars() {
+export function* fetchCars({filter}) {
     try {
         const cars = yield call(
-            CarAPI.fetch
+            CarAPI.fetch,
+            filter
         );
         yield put(
             fetchCarsSucceeded(cars)

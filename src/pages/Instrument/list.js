@@ -4,40 +4,40 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
 import {
-    fetchCountriesRequested,
-    sortCountry
-} from '../../actions/country'
+    fetchInstrumentsRequested,
+    sortInstrument
+} from '../../actions/instrument'
 
 class App extends PureComponent {
     componentDidMount() {
-        this.props.getCountries();
+        this.props.getInstruments();
     }
 
     render() {
-        const {countries, tableProps, onSort} = this.props;
+        const {instruments, tableProps, onSort} = this.props;
         return (
             <div>
                 <h3>Tabla de datos </h3>
-                <Link to="/country/edit/new"> Nuevo </Link>
+                <Link to="/instrument/edit/new"> Nuevo </Link>
                 <hr/>
-                <Table {...{data: countries, ...tableProps, onSort: onSort}}/>
+                <Table {...{data: instruments, ...tableProps, onSort: onSort}}/>
             </div>
         )
     }
 }
 
 const mapStateToProps = (state /* nuestro Store */, ownProps /*  */ ) => {
-    const {documents: {countries, loading}, tableProps} = state.country;
+    const {documents: {instruments, loading}, tableProps} = state.instrument;
     return {
         tableProps,
-        countries,
+        instruments,
         loading
     };
 }
 
 const mapDispatchToProps = (dispatch /* acciones a disparar */, ownProps /*  */ ) => ({
-    getCountries: () => dispatch(fetchCountriesRequested()),
-    onSort: sort => dispatch(sortCountry(sort))
+    getInstruments: () => dispatch(fetchInstrumentsRequested()),
+    onSort: sort => dispatch(sortInstrument(sort))
 })
 
 export default connect(

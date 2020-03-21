@@ -9,5 +9,5 @@ export const fetchQuotesSucceeded = quotes => ({
     quotes
 }) // Disparador o Action Creator
 
-export const SORT_QUOTES = 'SORT_QUOTES';
-export const sorQuotes = sort => ({type: SORT_QUOTES, sort});
+export const SORT_QUOTE = 'SORT_QUOTE';
+export const sortQuote = sort => ({type: SORT_QUOTE, sort});

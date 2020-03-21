@@ -4,40 +4,41 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
 import {
-    fetchCountriesRequested,
-    sortCountry
-} from '../../actions/country'
+    fetchCarsRequested,
+    sortCar
+} from '../../actions/car'
+
 
 class App extends PureComponent {
     componentDidMount() {
-        this.props.getCountries();
+        this.props.getCars();
     }
 
     render() {
-        const {countries, tableProps, onSort} = this.props;
+        const {cars, tableProps, onSort} = this.props;
         return (
             <div>
                 <h3>Tabla de datos </h3>
-                <Link to="/country/edit/new"> Nuevo </Link>
+                <Link to="/car/edit/new"> Nuevo </Link>
                 <hr/>
-                <Table {...{data: countries, ...tableProps, onSort: onSort}}/>
+                <Table {...{data: cars, ...tableProps, onSort: onSort}}/>
             </div>
         )
     }
 }
 
 const mapStateToProps = (state /* nuestro Store */, ownProps /*  */ ) => {
-    const {documents: {countries, loading}, tableProps} = state.country;
+    const {documents: {cars, loading}, tableProps} = state.car;
     return {
         tableProps,
-        countries,
+        cars,
         loading
     };
 }
 
 const mapDispatchToProps = (dispatch /* acciones a disparar */, ownProps /*  */ ) => ({
-    getCountries: () => dispatch(fetchCountriesRequested()),
-    onSort: sort => dispatch(sortCountry(sort))
+    getCars: () => dispatch(fetchCarsRequested()),
+    onSort: sort => dispatch(sortCar(sort))
 })
 
 export default connect(

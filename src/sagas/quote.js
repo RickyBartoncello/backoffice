@@ -3,15 +3,16 @@ import {
     put
 } from 'redux-saga/effects';
 
-import QuoteAPI from '../services/quote';
+import QuoteAPI from '../Api/quote';
 import {
     fetchQuotesSucceeded
 } from '../actions/quote';
 
-export function* fetchQuotes() {
+export function* fetchQuotes({filter}) {
     try {
         const quotes = yield call(
-            QuoteAPI.fetch
+            QuoteAPI.fetch,
+            filter
         );
         yield put(
             fetchQuotesSucceeded(quotes)
