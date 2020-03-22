@@ -3,8 +3,8 @@ import map from 'lodash/map';
 import get from 'lodash/get';
 
 export default ({data, columns, headers, onSort}) => (
-    <table border="5" dark>
-        <center>
+    <table border="5" className="bg-dark">
+        <center className="text-white">
             <thead>
                 <tr >
                     {map(headers, header => (
