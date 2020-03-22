@@ -17,16 +17,20 @@ export default function BasicExample() {
         <Router>
             <>
                 <nav>
-                    &nbsp;&nbsp;&nbsp;
-                    <Link to="/"><img src='.\home.png' width='50' height='50'></img> </Link>
-                    &nbsp;&nbsp;&nbsp;
-                    <Link to="/country"><img src='.\country.jpeg' width='100' height='50'></img></Link>
-                    &nbsp;&nbsp;&nbsp;
-                    <Link to="/cars"><img src='.\cars.jpeg' width='100' height='50'></img> </Link>
-                    &nbsp;&nbsp;&nbsp;
-                    <Link to="/instruments"><img src='.\instruments.png' width='100' height='50'></img> </Link>
-                    &nbsp;&nbsp;&nbsp;
-                     <Link to="/quotes"><img src='.\quotes.png' width='100' height='50'></img> </Link>
+                    <figure>
+                        &nbsp;&nbsp;&nbsp;
+                        <Link to="/"><img src='.\homee.jpeg' width='50' height='50'></img> </Link>
+                        <center>
+                        &nbsp;&nbsp;&nbsp;
+                        <Link to="/country"><img src='.\country.jpeg' width='100' height='50'></img></Link>
+                        &nbsp;&nbsp;&nbsp;
+                        <Link to="/cars"><img src='.\cars.jpeg' width='100' height='50'></img> </Link>
+                        &nbsp;&nbsp;&nbsp;
+                        <Link to="/instruments"><img src='.\instruments.png' width='100' height='50'></img> </Link>
+                        &nbsp;&nbsp;&nbsp;
+                        <Link to="/quotes"><img src='.\quotes.png' width='100' height='50'></img> </Link>
+                        </center>
+                    </figure>
                 </nav>
 
                 <hr />

@@ -3,18 +3,24 @@ import map from 'lodash/map';
 import get from 'lodash/get';
 
 export default ({data, columns, headers, onSort}) => (
-    <table border="5">
-        <tr >
-            {map(headers, header => (
-                <th onClick={() => onSort(header)}>
-                    {header.label}
-                </th>
-            ))}
-        </tr>
-        {map(data, d => (
-            <tr key={d.id}>
-                {map(columns, column => <td>{get(d, column)}</td>)}
-            </tr>
-        ))}
+    <table border="5" dark>
+        <center>
+            <thead>
+                <tr >
+                    {map(headers, header => (
+                        <th onClick={() => onSort(header)}>
+                            {header.label}
+                        </th>
+                    ))}
+                </tr>
+            </thead>
+            <tbody> 
+                {map(data, d => (
+                    <tr key={d.id}>
+                        {map(columns, column => <td>{get(d, column)}</td>)}
+                    </tr>       
+                ))}
+            </tbody>
+        </center> 
     </table>
 )
