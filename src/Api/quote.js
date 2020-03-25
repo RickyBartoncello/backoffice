@@ -2,12 +2,12 @@ import Http from '.';
 
 const API = 'api/quotes';
 
-class Quotes {
+class Quote {
     static fetch(filters) {
-        console.log(filters)
+        console.log(filters);
         const filterObj = new URLSearchParams(filters).toString();
         return Http.get(`${API}?${filterObj}`);
     }
 }
 
-export default Quotes;
+export default Quote;

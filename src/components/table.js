@@ -1,7 +1,7 @@
 import React from 'react';
 import map from 'lodash/map';
 import get from 'lodash/get';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import Button from 'reactstrap/lib/Button';
 import Table from 'reactstrap/lib/Table';
 import {
@@ -26,24 +26,28 @@ export default ({ data, columns, headers, onSort, limit, total, onPageClick, cur
                         <tr>
                             {map(headers, header => (
                                 <th onClick={() => onSort(header)}>
-                                    <center>
-                                        {header.label}
-                                        {header.sort === 'desc' && (<i className="fas fa-angle-up float-right" />)}
-                                        {header.sort !== 'desc' && (<i className="fas fa-angle-down float-right" />)}
-                                    </center>
+                                    {header.label}
+                                    {header.sort === 'desc' && (<i className="fas fa-angle-up float-right" />)}
+                                    {header.sort !== 'desc' && (<i className="fas fa-angle-down float-right" />)}
                                 </th>
                             ))}
                         </tr>
                     </thead>
                     <tbody>
                         {map(data, d => (
-                            <tr key={d.id} className={d.deleted ? "bg-danger" : ""}>
-                                {map(columns, column => {
-                                    if (column === 'actions') {
-                                        return (<td><centrer><Button tag={Link} color="primary" to={`/country/edit/${d.code}`}> Edicion </Button></centrer></td>);
-                                    }
-                                    return (<td><center>{get(d, column)}</center></td>);
-                                })}
+                            <tr key={d.id} className={d.deleted ? "bg-danger": ""}>
+                            {map(columns, column => {
+                                if(column === 'actions') {
+                                    return (
+                                    <td>
+                                        <Button tag={Link} color="primary" to={`/country/edit/${d.code}`}> Edición </Button>
+                                        <Button tag={Link} color="primary" to={`/car/edit/${d.code}`}> Edición </Button>
+                                        <Button tag={Link} color="primary" to={`/instrument/edit/${d.code}`}> Edición </Button>
+                                        <Button tag={Link} color="primary" to={`/quote/edit/${d.code}`}> Edición </Button>
+                                    </td>);
+                                }
+                                return (<td>{get(d, column)}</td>);
+                            })}
                             </tr>
                         ))}
                     </tbody>
@@ -75,4 +79,5 @@ export default ({ data, columns, headers, onSort, limit, total, onPageClick, cur
             </Col>
         </Row>
     </Container>
+
 )

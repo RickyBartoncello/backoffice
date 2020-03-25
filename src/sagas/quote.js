@@ -1,6 +1,7 @@
 import {
     call,
-    put
+    put,
+    delay
 } from 'redux-saga/effects';
 
 import QuoteAPI from '../Api/quote';
@@ -10,12 +11,13 @@ import {
 
 export function* fetchQuotes({filter}) {
     try {
-        const quotes = yield call(
+        const {quotes, limit, total} = yield call(
             QuoteAPI.fetch,
             filter
         );
+        yield delay(1500);
         yield put(
-            fetchQuotesSucceeded(quotes)
+            fetchQuotesSucceeded(quotes, limit, total)
         );
     } catch (err) {
         alert(JSON.stringify(err));

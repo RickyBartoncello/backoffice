@@ -1,5 +1,3 @@
-import constant from 'lodash/constant';
-
 export const FETCH_QUOTES_REQUESTED = 'FETCH_QUOTES_REQUESTED'; // Accion | Action
 export const FETCH_QUOTES_SUCCEEDED = 'FETCH_QUOTES_SUCCEEDED'; // Accion | Action
 

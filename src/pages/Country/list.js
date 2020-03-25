@@ -1,7 +1,7 @@
-import React, { PureComponent } from 'react';
+import React, {PureComponent} from 'react';
 import Table from '../../components/table';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import {
     Container,
     Button,
@@ -19,10 +19,10 @@ class App extends PureComponent {
     componentDidMount() {
         this.props.getCountries();
     }
-    
+
     handlePagination = (skip) => {
-        this.props.getCountries({ skip });
-    }
+        this.props.getCountries({skip});
+    } 
 
     render() {
         const {
@@ -37,13 +37,13 @@ class App extends PureComponent {
             <Container>
                 <Row>
                     <Col>
-                        <h3> Tabla de datos</h3>
+                        <h3>Tabla de datos </h3>
                     </Col>
                     <Col sm="3">
-                        <Button color="primary" tag={Link} to="/country/edit/new">Nuevo</Button>
+                        <Button color="primary" tag={Link} to="/country/edit/new"> Nuevo </Button>
                     </Col>
                 </Row>
-                <hr />
+                <hr/>
                 <Row>
                     <Col>
                         {loading && (
@@ -57,7 +57,7 @@ class App extends PureComponent {
                                 limit,
                                 total,
                                 onPageClick: this.handlePagination
-                            }} />
+                            }}/>
                         )}
                     </Col>
                 </Row>
@@ -66,8 +66,8 @@ class App extends PureComponent {
     }
 }
 
-const mapStateToProps = (state /* nuestro Store */, ownProps /*  */) => {
-    const { documents: { countries,limit, total, loading }, tableProps } = state.country;
+const mapStateToProps = (state /* nuestro Store */, ownProps /*  */ ) => {
+    const {documents: {countries, limit, total, loading}, tableProps} = state.country;
     return {
         tableProps,
         countries,
@@ -77,8 +77,8 @@ const mapStateToProps = (state /* nuestro Store */, ownProps /*  */) => {
     };
 }
 
-const mapDispatchToProps = (dispatch /* acciones a disparar */, ownProps /*  */) => ({
-    getCountries: () => dispatch(fetchCountriesRequested()),
+const mapDispatchToProps = (dispatch /* acciones a disparar */, ownProps /*  */ ) => ({
+    getCountries: filters => dispatch(fetchCountriesRequested(filters)),
     onSort: sort => dispatch(sortCountry(sort))
 })
 

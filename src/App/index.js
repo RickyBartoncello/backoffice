@@ -21,28 +21,29 @@ export default function BasicExample() {
                         &nbsp;&nbsp;&nbsp;
                         <Link to="/"><img src='.\logo192.png' width='50' height='50'></img> </Link>
                         <center>
-                        &nbsp;&nbsp;&nbsp;
-                        <Link to="/country"><img src='.\country.jpeg' width='100' height='50'></img></Link>
-                        &nbsp;&nbsp;&nbsp;
-                        <Link to="/cars"><img src='.\cars.jpeg' width='100' height='50'></img> </Link>
-                        &nbsp;&nbsp;&nbsp;
-                        <Link to="/instruments"><img src='.\instruments.png' width='100' height='50'></img> </Link>
-                        &nbsp;&nbsp;&nbsp;
-                        <Link to="/quotes"><img src='.\quotes.png' width='100' height='50'></img> </Link>
+                            &nbsp;&nbsp;&nbsp;
+                            <Link to="/country">Country</Link>
+                            &nbsp;&nbsp;&nbsp;
+                            <Link to="/cars">Cars</Link>
+                            &nbsp;&nbsp;&nbsp;
+                            <Link to="/instruments">Instruments</Link>
+                            &nbsp;&nbsp;&nbsp;
+                            <Link to="/quotes">Quotes</Link>
+
                         </center>
                     </figure>
                 </nav>
 
-                <hr />
+                    <hr />
 
-                <Switch>
-                    <Route exact path="/" component={Home}/>
-                    <Route path="/cars" component={Cars}/>
-                    <Route path="/country" component={Country}/>
-                    <Route path="/instruments" component={Instruments}/>
-                    <Route path="/quotes" component={Quote}/>
-                </Switch>
+                    <Switch>
+                        <Route exact path="/" component={Home} />
+                        <Route path="/cars" component={Cars} />
+                        <Route path="/country" component={Country} />
+                        <Route path="/instruments" component={Instruments} />
+                        <Route path="/quotes" component={Quote} />
+                    </Switch>
             </>
-        </Router>
+            </Router>
     );
 }
