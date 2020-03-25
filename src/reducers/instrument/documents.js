@@ -16,7 +16,8 @@ export default (state = initialState, action) => {
         case FETCH_INSTRUMENTS_REQUESTED:
             return {...state, loading: true};
         case FETCH_INSTRUMENTS_SUCCEEDED:
-            return {...state, loading: false, instruments: action.instruments};
+            const {instruments, limit, total} = action;
+            return {...state, loading: false, instruments, limit, total};
         case SORT_INSTRUMENT:
             return {
                 ...state,

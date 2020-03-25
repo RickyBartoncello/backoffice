@@ -16,7 +16,8 @@ export default (state = initialState, action) => {
         case FETCH_CARS_REQUESTED:
             return {...state, loading: true};
         case FETCH_CARS_SUCCEEDED:
-            return {...state, loading: false, cars: action.cars};
+            const{cars, limit, total} = action;
+            return {...state, loading: false, cars, limit, total};
         case SORT_CAR:
             return {
                 ...state,

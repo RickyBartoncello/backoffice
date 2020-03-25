@@ -16,7 +16,8 @@ export default (state = initialState, action) => {
         case FETCH_QUOTES_REQUESTED:
             return {...state, loading: true};
         case FETCH_QUOTES_SUCCEEDED:
-            return {...state, loading: false, quotes: action.quotes};
+            const {quotes, limit, total} = action;
+            return {...state, loading: false, quotes, limit, total};
         case SORT_QUOTE:
             return {
                 ...state,

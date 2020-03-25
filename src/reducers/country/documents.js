@@ -16,7 +16,8 @@ export default (state = initialState, action) => {
         case FETCH_COUNTRIES_REQUESTED:
             return {...state, loading: true};
         case FETCH_COUNTRIES_SUCCEEDED:
-            return {...state, loading: false, countries: action.countries};
+            const {countries, limit, total} = action;
+            return {...state, loading: false, countries, limit, total};
         case SORT_COUNTRY:
             return {
                 ...state,
