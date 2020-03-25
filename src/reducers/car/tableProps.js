@@ -17,7 +17,7 @@ const initialState = {
         },
         {
             id: 'model',
-            label: 'Moelo',
+            label: 'Modelo',
             sort: 'desc'
         },
         {

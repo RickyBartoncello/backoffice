@@ -3,10 +3,10 @@ import constant from 'lodash/constant';
 export const FETCH_COUNTRIES_REQUESTED = 'FETCH_COUNTRIES_REQUESTED'; // Accion | Action
 export const FETCH_COUNTRIES_SUCCEEDED = 'FETCH_COUNTRIES_SUCCEEDED'; // Accion | Action
 
-export const fetchCountriesRequested = constant({type: FETCH_COUNTRIES_REQUESTED}) // Disparador o Action Creator
-export const fetchCountriesSucceeded = countries => ({
+export const fetchCountriesRequested = filter => ({type: FETCH_COUNTRIES_REQUESTED, filter}) // Disparador o Action Creator
+export const fetchCountriesSucceeded = (countries, limit, total) => ({
     type: FETCH_COUNTRIES_SUCCEEDED,
-    countries
+    countries, limit, total
 }) // Disparador o Action Creator
 
 export const SORT_COUNTRY = 'SORT_COUNTRY';

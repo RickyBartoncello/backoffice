@@ -16,10 +16,10 @@ export default function BasicExample() {
     return (
         <Router>
             <>
-                <nav>
+                <nav className="bg-dark">
                     <figure>
                         &nbsp;&nbsp;&nbsp;
-                        <Link to="/"><img src='.\homee.jpeg' width='50' height='50'></img> </Link>
+                        <Link to="/"><img src='.\logo192.png' width='50' height='50'></img> </Link>
                         <center>
                         &nbsp;&nbsp;&nbsp;
                         <Link to="/country"><img src='.\country.jpeg' width='100' height='50'></img></Link>
