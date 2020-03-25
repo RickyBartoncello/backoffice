@@ -38,18 +38,19 @@ export default ({ data, columns, headers, onSort, limit, total, onPageClick, cur
                     <tbody>
                         {map(data, d => (
                             <tr key={d.id} className={d.deleted ? "bg-danger" : ""}>
-                                
-                                    {map(columns, column => {
-                                        if (column === 'actions') {
-                                            return (<td>
-                                                <center>
-                                                    <Button tag={Link} color="primary" to={`/src/pages/Country/edit.js${d.code}`} className="badge-pill"> Edición </Button>
-                                                </center>
-                                            </td>);
-                                        }
 
-                                        return (<td><center>{get(d, column)}</center></td>);
-                                    })}
+                                {map(columns, column => {
+                                    if (column === 'actions') {
+                                        return (<td>
+                                            <center>
+                                                <Button tag={Link} color="primary" to={`/src/pages/Country/edit.js${d.code}`} className="badge-pill"> Edición </Button>
+                                                <Button tag={Link} to={`/src/pages/Country/edit.js${d.code}`} className="badge-pill badge-danger"> Delete </Button>
+                                            </center>
+                                        </td>);
+                                    }
+
+                                    return (<td><center>{get(d, column)}</center></td>);
+                                })}
                             </tr>
                         ))}
                     </tbody>
