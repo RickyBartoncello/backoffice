@@ -4,7 +4,7 @@ export const FETCH_QUOTES_SUCCEEDED = 'FETCH_QUOTES_SUCCEEDED'; // Accion | Acti
 export const fetchQuotesRequested = filter =>({type: FETCH_QUOTES_REQUESTED, filter})// Disparador o Action Creator
 export const fetchQuotesSucceeded = (quotes, limit, total) => ({
     type: FETCH_QUOTES_SUCCEEDED,
-    quotes
+    quotes, limit, total
 }) // Disparador o Action Creator
 
 export const SORT_QUOTE = 'SORT_QUOTE';

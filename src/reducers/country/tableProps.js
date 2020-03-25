@@ -8,6 +8,7 @@ const initialState = {
         'name',
         'code',
         'createdAt',
+        'actions'
     ],
     headers: [
         {
@@ -24,6 +25,10 @@ const initialState = {
             id: 'createdAt',
             label: 'Creado',
             sort: 'desc'
+        },
+        {
+            id: 'actions',
+            label: 'Acciones'
         }
     ]
 };

@@ -24,6 +24,10 @@ const initialState = {
             id: 'createdAt',
             label: 'Creado',
             sort: 'desc'
+        },
+        {
+            id: 'actions',
+            label: 'Acciones'
         }
     ]
 };

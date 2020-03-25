@@ -24,6 +24,10 @@ const initialState = {
             id: 'instrument',
             label: 'Instrumento',
             sort: 'desc'
+        },
+        {
+            id: 'actions',
+            label: 'Acciones'
         }
     ]
 };

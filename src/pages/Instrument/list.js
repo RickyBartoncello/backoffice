@@ -78,7 +78,7 @@ const mapStateToProps = (state /* nuestro Store */, ownProps /*  */) => {
 }
 
 const mapDispatchToProps = (dispatch /* acciones a disparar */, ownProps /*  */ ) => ({
-    getInstruments: () => dispatch(fetchInstrumentsRequested()),
+    getInstruments: filters => dispatch(fetchInstrumentsRequested(filters)),
     onSort: sort => dispatch(sortInstrument(sort))
 })
 
