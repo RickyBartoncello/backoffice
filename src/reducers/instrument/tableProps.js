@@ -7,7 +7,8 @@ const initialState = {
     columns: [
         'family',
         'instrument',
-        'actions'
+        'actions',
+        'delete'
     ],
     headers: [
         {
@@ -26,9 +27,8 @@ const initialState = {
         }
     ]
 };
-
 export default (state = initialState, action) => {
-    switch(action.type) {
+    switch (action.type) {
         case SORT_INSTRUMENT:
             const sortedOption = find(state.headers, header => header.id === action.sort.id);
             sortedOption.sort = sortedOption.sort === 'desc' ? 'asc' : 'desc';

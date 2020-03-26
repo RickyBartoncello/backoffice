@@ -1,10 +1,12 @@
 import {
     FETCH_COUNTRIES_SUCCEEDED,
     FETCH_COUNTRIES_REQUESTED,
-    SORT_COUNTRY
+    SORT_COUNTRY,
+    EDIT_COUNTRY,
 } from '../../actions/country';
 
 import orderBy from 'lodash/orderBy'
+//import edit from 'lodash/edit'
 
 const initialState = {
     loading: false,
@@ -27,6 +29,13 @@ export default (state = initialState, action) => {
                     [action.sort.sort]
                 )
             };
+        /*case EDIT_COUNTRY:
+            return {...state, 
+                loading: true,
+                countries: edit(state.countries,
+                    [action.edit.id]
+                    )
+            };*/
         default:
             return state;
     }

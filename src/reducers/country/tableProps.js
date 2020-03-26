@@ -27,8 +27,8 @@ const initialState = {
             sort: 'desc'
         },
         {
-            id: 'actions',
-            label: 'Acciones'
+        id: 'actions',
+        label: 'Acciones'
         }
     ]
 };

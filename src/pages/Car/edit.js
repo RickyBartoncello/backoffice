@@ -18,7 +18,27 @@ const Edit = (props) => {
 
     return (
         <div>
-            {JSON.stringify(cars)}
+            <center><h3><b>Edicion del Automovil</b></h3></center>
+            <form className="text-center">
+                <label for="brand">
+                    Marca de Automovil: 
+                <input id="brand" type="text" brand="brand" placeholder="Entrada de la Marca" required/>
+                </label>
+                <br/>
+                <br/>
+                <label for="model">
+                    Modelo del Automovil:
+                <input id="model" type="text" model="model" placeholder="Entrada del Modelo" required />
+                </label>
+                <br/>
+                <br/>
+                <label for="year">
+                    Ano del Automovil:
+                <input id="year" type="number" year="year" placeholder="Entrada del Ano" required />
+                </label>
+                <br/>
+                <input type="submit" value="Enviar Modificacion" />
+            </form>
         </div>
     )
 };

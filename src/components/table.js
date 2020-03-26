@@ -17,12 +17,12 @@ import times from 'lodash/times';
 import ceil from 'lodash/ceil';
 import toNumber from 'lodash/toNumber';
 
-export default ({ data, columns, headers, onSort, limit, total, onPageClick, currentPage, }) => (
+export default ({ data, columns, headers, onSort, limit, total, onPageClick, currentPage, linkTo }) => (
     <Container fluid>
         <Row>
             <Col>
                 <Table bordered size="sm" hovered dark className="table table-striped table-bordered text-center">
-                    <thead>
+                    <thead> 
                         <tr>
                             {map(headers, header => (
                                 <th onClick={() => onSort(header)}>
@@ -36,13 +36,13 @@ export default ({ data, columns, headers, onSort, limit, total, onPageClick, cur
                         </tr>
                     </thead>
                     <tbody>
-                        {map(data, d => (
+                    {map(data, d => (
                             <tr key={d.id} className={d.deleted ? "bg-danger" : ""}>
                                 {map(columns, column => {
                                     if (column === 'actions') {
                                         return (<td >
-                                            <Button tag={Link} color="primary" className="badge-pill" to={`country/edit/${d.code}`}> Edición </Button>
-                                            <Button tag={Link} color="primary" className="badge-pill badge-danger"> Delete </Button>
+                                            <Button tag={Link} color="primary" className="badge-pill" to={`${linkTo}/edit/${d.code}`}> Edición  </Button>
+                                            <Button tag={Link} className="badge-pill badge-danger">  Delete </Button>
                                         </td>);
                                     }
                                     return (<td>{get(d, column)}</td>);

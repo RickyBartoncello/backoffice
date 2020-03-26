@@ -46,7 +46,7 @@ class App extends PureComponent {
                     <Col>
                         <h3>Tabla de datos </h3>
                     </Col>
-                    <Col sm="3">
+                    <Col sm="0">
                         <Button color="primary" tag={Link} to="/country/edit/new"> Nuevo </Button>
                     </Col>
                 </Row>
@@ -63,7 +63,8 @@ class App extends PureComponent {
                                 onSort,
                                 limit,
                                 total,
-                                onPageClick: this.handlePagination
+                                onPageClick: this.handlePagination,
+                                linkTo: "country"
                             }}/>
                         )}
                     </Col>
