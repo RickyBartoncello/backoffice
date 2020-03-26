@@ -17,20 +17,20 @@ import times from 'lodash/times';
 import ceil from 'lodash/ceil';
 import toNumber from 'lodash/toNumber';
 
-export default ({ data, columns, headers, onSort, limit, total, onPageClick, currentPage }) => (
+export default ({ data, columns, headers, onSort, limit, total, onPageClick, currentPage, }) => (
     <Container fluid>
         <Row>
             <Col>
-                <Table bordered size="sm" hovered dark>
+                <Table bordered size="sm" hovered dark className="table table-striped table-bordered text-center">
                     <thead>
                         <tr>
                             {map(headers, header => (
                                 <th onClick={() => onSort(header)}>
-                                    <center>
-                                        {header.label}
-                                        {header.sort === 'desc' && (<i className="fas fa-angle-up float-right" />)}
-                                        {header.sort !== 'desc' && (<i className="fas fa-angle-down float-right" />)}
-                                    </center>
+
+                                    {header.label}
+                                    {header.sort === 'desc' && (<i className="fas fa-angle-up float-right" />)}
+                                    {header.sort !== 'desc' && (<i className="fas fa-angle-down float-right" />)}
+
                                 </th>
                             ))}
                         </tr>
@@ -38,21 +38,17 @@ export default ({ data, columns, headers, onSort, limit, total, onPageClick, cur
                     <tbody>
                         {map(data, d => (
                             <tr key={d.id} className={d.deleted ? "bg-danger" : ""}>
-
                                 {map(columns, column => {
                                     if (column === 'actions') {
-                                        return (<td>
-                                            <center>
-                                                <Button tag={Link} color="primary" to={`/src/pages/Country/edit.js${d.code}`} className="badge-pill"> Edición </Button>
-                                                <Button tag={Link} to={`/src/pages/Country/edit.js${d.code}`} className="badge-pill badge-danger"> Delete </Button>
-                                            </center>
+                                        return (<td >
+                                            <Button tag={Link} color="primary" className="badge-pill" to={`country/edit/${d.code}`}> Edición </Button>
+                                            <Button tag={Link} color="primary" className="badge-pill badge-danger"> Delete </Button>
                                         </td>);
                                     }
-
-                                    return (<td><center>{get(d, column)}</center></td>);
+                                    return (<td>{get(d, column)}</td>);
                                 })}
                             </tr>
-                        ))}
+                      ))}
                     </tbody>
                     <tfoot>
                         <tr>
@@ -77,10 +73,9 @@ export default ({ data, columns, headers, onSort, limit, total, onPageClick, cur
                                 </Pagination>
                             </td>
                         </tr>
-                    </tfoot>\
+                    </tfoot>
                 </Table>
             </Col>
         </Row>
     </Container>
-
 )

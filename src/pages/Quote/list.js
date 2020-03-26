@@ -67,7 +67,7 @@ class App extends PureComponent {
 }
 
 const mapStateToProps = (state /* nuestro Store */, ownProps /*  */) => {
-    const { documents: { quotes, limit, total, loading }, tableProps } = state.country;
+    const { documents: { quotes, limit, total, loading }, tableProps } = state.quote;
     return {
         tableProps,
         quotes,

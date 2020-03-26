@@ -8,6 +8,7 @@ const initialState = {
         'text',
         'author',
         'createdAt',
+        'actions'
     ],
     headers: [
         {

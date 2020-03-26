@@ -23,6 +23,13 @@ class App extends PureComponent {
     handlePagination = (skip) => {
         this.props.getCountries({skip});
     } 
+    removeCountry(index) {
+        this.setState({
+          countries: this.state.countries.filter((e, i) => {
+            return i !== index
+          })
+        });
+      }
 
     render() {
         const {

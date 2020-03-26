@@ -9,3 +9,6 @@ export const fetchCountriesSucceeded = (countries, limit, total) => ({
 
 export const SORT_COUNTRY = 'SORT_COUNTRY';
 export const sortCountry = sort => ({type: SORT_COUNTRY, sort});
+
+//export const DELETE_COUNTRY = 'DELETE_COUNTRY';
+//export const deleteCountry = delete => ({type: DELETE_COUNTRY, delete});

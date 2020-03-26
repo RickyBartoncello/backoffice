@@ -33,35 +33,35 @@ class App extends PureComponent {
             onSort,
             loading
         } = this.props;
-        return(
-        <Container>
-            <Row>
-                <Col>
-                    <h3> Tabla de datos</h3>
-                </Col>
-                <Col sm="3">
-                    <Button color="primary" tag={Link} to="/car/edit/new">Nuevo</Button>
-                </Col>
-            </Row>
-            <hr />
-            <Row>
-                <Col>
-                    {loading && (
-                        <Spinner color="danger" />
-                    )}
-                    {!loading && (
-                        <Table {...{
-                            data: cars,
-                            ...tableProps,
-                            onSort,
-                            limit,
-                            total,
-                            onPageClick: this.handlePagination
-                        }} />
-                    )}
-                </Col>
-            </Row>
-        </Container>
+        return (
+            <Container>
+                <Row>
+                    <Col>
+                        <h3> Tabla de datos</h3>
+                    </Col>
+                    <Col sm="3">
+                        <Button color="primary" tag={Link} to="/car/edit/new">Nuevo</Button>
+                    </Col>
+                </Row>
+                <hr />
+                <Row>
+                    <Col>
+                        {loading && (
+                            <Spinner color="danger" />
+                        )}
+                        {!loading && (
+                            <Table {...{
+                                data: cars,
+                                ...tableProps,
+                                onSort,
+                                limit,
+                                total,
+                                onPageClick: this.handlePagination
+                            }} />
+                        )}
+                    </Col>
+                </Row>
+            </Container>
         )
     }
 }
@@ -77,7 +77,7 @@ const mapStateToProps = (state /* nuestro Store */, ownProps /*  */) => {
     };
 }
 
-const mapDispatchToProps = (dispatch /* acciones a disparar */, ownProps /*  */ ) => ({
+const mapDispatchToProps = (dispatch /* acciones a disparar */, ownProps /*  */) => ({
     getCars: filters => dispatch(fetchCarsRequested(filters)),
     onSort: sort => dispatch(sortCar(sort))
 })

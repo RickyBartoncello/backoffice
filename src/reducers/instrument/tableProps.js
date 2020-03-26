@@ -5,16 +5,11 @@ import {
 
 const initialState = {
     columns: [
-        'hexfamily',
         'family',
         'instrument',
+        'actions'
     ],
     headers: [
-        {
-            id: 'hexfamily',
-            label: 'Hexfamilia',
-            sort: 'desc'
-        },
         {
             id: 'family',
             label: 'Familia',

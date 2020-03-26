@@ -10,7 +10,7 @@ import Edit from './edit';
 export default ({match: {path}}) => (
     <Switch>
         <Route path={`${path}/edit/new`} exact component={Edit} />
-        <Route path={`${path}/edit/:id`} exact component={Edit} />
+        <Route path={`${path}/edit/:code`} exact component={Edit} />
         <Route path={path} component={List}/>
     </Switch>
-)
+);

@@ -8,6 +8,7 @@ const initialState = {
         'brand',
         'model',
         'year',
+        'actions'
     ],
     headers: [
         {

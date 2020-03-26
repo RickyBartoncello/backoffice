@@ -20,30 +20,27 @@ export default function BasicExample() {
                     <figure>
                         &nbsp;&nbsp;&nbsp;
                         <Link to="/"><img src='.\logo192.png' width='50' height='50'></img> </Link>
-                        <center>
-                            &nbsp;&nbsp;&nbsp;
-                            <Link to="/country">Country</Link>
-                            &nbsp;&nbsp;&nbsp;
+                        <div className="text-center p-2">
+                        &nbsp;&nbsp;&nbsp;
                             <Link to="/cars">Cars</Link>
+                            &nbsp;&nbsp;&nbsp;
+                            <Link to="/country">Countries</Link>
                             &nbsp;&nbsp;&nbsp;
                             <Link to="/instruments">Instruments</Link>
                             &nbsp;&nbsp;&nbsp;
                             <Link to="/quotes">Quotes</Link>
-
-                        </center>
+                        </div>
                     </figure>
                 </nav>
-
-                    <hr />
-
-                    <Switch>
-                        <Route exact path="/" component={Home} />
-                        <Route path="/cars" component={Cars} />
-                        <Route path="/country" component={Country} />
-                        <Route path="/instruments" component={Instruments} />
-                        <Route path="/quotes" component={Quote} />
-                    </Switch>
+                <hr />
+                <Switch>
+                    <Route exact path="/" component={Home} />
+                    <Route path="/cars" component={Cars} />
+                    <Route path="/country" component={Country} />
+                    <Route path="/instruments" component={Instruments} />
+                    <Route path="/quotes" component={Quote} />
+                </Switch>
             </>
-            </Router>
+        </Router>
     );
 }

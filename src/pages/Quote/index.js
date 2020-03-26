@@ -13,4 +13,4 @@ export default ({match: {path}}) => (
         <Route path={`${path}/edit/:id`} exact component={Edit} />
         <Route path={path} component={List}/>
     </Switch>
-)
+);
