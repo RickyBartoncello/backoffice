@@ -4,6 +4,11 @@ import {
     fetchCarsRequested
 } from '../../actions/car'
 
+const onSubmit = e => {
+    e.preventDefault()
+    
+}
+
 const Edit = (props) => {
     console.log(props);
     const dispatch = useDispatch();
@@ -19,7 +24,7 @@ const Edit = (props) => {
     return (
         <div>
             <center><h3><b>Edicion del Automovil</b></h3></center>
-            <form className="text-center">
+            <form  onSubmit= {} className="text-center">
                 <label for="brand">
                     Marca de Automovil: 
                 <input id="brand" type="text" brand="brand" placeholder="Entrada de la Marca" required/>

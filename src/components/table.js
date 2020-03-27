@@ -45,7 +45,7 @@ export default ({ data, columns, headers, onSort, limit, total, onPageClick, cur
                                             <Button tag={Link} className="badge-pill badge-danger">  Delete </Button>
                                         </td>);
                                     }
-                                    return (<td>{get(d, column)}</td>);
+                                    return (<td>{get( d, column)}</td>);
                                 })}
                             </tr>
                       ))}

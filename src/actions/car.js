@@ -9,3 +9,5 @@ export const fetchCarsSucceeded = (cars, limit, total ) => ({
 
 export const SORT_CAR = 'SORT_CAR';
 export const sortCar = sort => ({type: SORT_CAR, sort});
+
+
