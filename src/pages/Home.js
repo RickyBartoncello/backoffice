@@ -8,16 +8,16 @@ import {
 export default () => (
   <Container>
     <Row>
-      <Col>
-        <h1 className="text-center">
-          <b>Interest Data's Table</b>
-        </h1>
+      <Col sm={12} className="text-center">
+        <h1 className="oswald title-home">
+          &nbsp;Bienvenido al Sistema&nbsp;
+                </h1>
         <hr />
       </Col>
     </Row>
     <Row>
       <Col>
-      <p className="text-center">
+        <p className="text-center">
           <b>Seleccione alguna opcion</b>
         </p>
       </Col>

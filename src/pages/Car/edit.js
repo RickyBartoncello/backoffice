@@ -1,50 +1,103 @@
-import React, {useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import React, { PureComponent } from 'react';
+import { Link } from 'react-router-dom';
+
 import {
-    fetchCarsRequested
-} from '../../actions/car'
+    Container,
+    Row,
+    Col,
+    Button,
+    Form,
+    FormGroup,
+    Label,
+    Input
+} from 'reactstrap';
 
-const onSubmit = e => {
-    e.preventDefault()
-    
-}
-
-const Edit = (props) => {
-    console.log(props);
-    const dispatch = useDispatch();
-    const [cars] = useSelector(state => state.car.documents.cars);
-    if (props.match.params.code) {
-        // eslint-disable-next-line react-hooks/rules-of-hooks
-        useEffect(() => dispatch(fetchCarsRequested(props.match.params)), [
-            dispatch,
-            props.match.params
-        ]);
+class Edit extends PureComponent {
+    constructor(props) {
+        super(props);
+        this.state = {
+            stateBrand: '',
+            stateModel: '',
+            stateYear: ''
+        };
     }
 
-    return (
-        <div>
-            <center><h3><b>Edicion del Automovil</b></h3></center>
-            <form  onSubmit= {} className="text-center">
-                <label for="brand">
-                    Marca de Automovil: 
-                <input id="brand" type="text" brand="brand" placeholder="Entrada de la Marca" required/>
-                </label>
-                <br/>
-                <br/>
-                <label for="model">
-                    Modelo del Automovil:
-                <input id="model" type="text" model="model" placeholder="Entrada del Modelo" required />
-                </label>
-                <br/>
-                <br/>
-                <label for="year">
-                    Ano del Automovil:
-                <input id="year" type="number" year="year" placeholder="Entrada del Ano" required />
-                </label>
-                <br/>
-                <input type="submit" value="Enviar Modificacion" />
-            </form>
-        </div>
-    )
-};
+    handleChange(value, property) {
+        this.setState(
+            () => ({ [property]: value })
+        );
+    }
+
+    render() {
+        const {
+            brand,
+            model,
+            year,
+            submitAction
+        } = this.props;
+
+        const {
+            stateBrand,
+            stateModel,
+            stateYear
+        } = this.state;
+
+        return (
+            <Container fluid>
+                <Form>
+                    <FormGroup>
+                        <Label for="brand">Marca:</Label>
+                        <Input
+                            key="brand"
+                            type="text"
+                            name="brand"
+                            id="brand"
+                            placeholder="Escribe Marca del Automovil"
+                            value={stateBrand}
+                            onChange={
+                                ({ target: { value } }) => this.handleChange(value, 'stateBrand')
+                            }
+                            required
+                        />
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="model">Modelo: </Label>
+                        <Input
+                            key="model"
+                            type="text"
+                            name="model"
+                            id="model"
+                            placeholder="Escribe el Modelo del Automovil"
+                            value={stateModel}
+                            onChange={
+                                ({ target: { value } }) => this.handleChange(value, 'stateModel')
+                            }
+                            required
+                        />
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="year">Ano: </Label>
+                        <Input
+                            key="year"
+                            type="number"
+                            name="year"
+                            id="year"
+                            placeholder="Escribe el Ano del Automovil"
+                            value={stateYear}
+                            onChange={
+                                ({ target: { value } }) => this.handleChange(value, 'stateYear')
+                            }
+                            required
+                        />
+                    </FormGroup>
+                    <Button
+                    tag={Link} color="primary" className="badge-pill" to={`../cars`} >
+                        Enviar Modificacion
+                    </Button>
+                </Form>
+            </Container>
+        );
+    }
+}
+
 export default Edit;

@@ -1,39 +1,102 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-    fetchCountriesRequested
-} from '../../actions/country'
+import React, { PureComponent } from 'react';
+import { Link } from 'react-router-dom';
 
-const Edit = (props) => {
-    console.log(props);
-    const dispatch = useDispatch();
-    const [countries] = useSelector(state => state.country.documents.countries);
-    if (props.match.params.code) {
-        // eslint-disable-next-line react-hooks/rules-of-hooks
-        useEffect(() => dispatch(fetchCountriesRequested(props.match.params)), [
-            dispatch,
-            props.match.params
-        ]);
+import {
+    Container,
+    Row,
+    Col,
+    Button,
+    Form,
+    FormGroup,
+    Label,
+    Input
+} from 'reactstrap';
+
+class Edit extends PureComponent {
+    constructor(props) {
+        super(props);
+        this.state = {
+            stateName: '',
+            stateCode: '',
+            stateCreatedAt: ''
+        };
     }
 
-    return (
-        <div>
-            <center><h3><b>Edicion del Pais</b></h3></center>
-            <form className="text-center">
-                <label for="name">
-                    Pais: 
-                <input id="name" type="text" name="name" placeholder="Entrada del Pais" required/>
-                </label>
-                <br/>
-                <br/>
-                <label for="code">
-                    Codigo del Pais:
-                <input id="code" type="text" code="code" placeholder="Entrada del Codigo" required />
-                </label>
-                <br/>
-                <input type="submit" value="Enviar Modificacion" />
-            </form>
-        </div>
-    )
-};
+    handleChange(value, property) {
+        this.setState(
+            () => ({ [property]: value })
+        );
+    }
+
+    render() {
+        const {
+            name,
+            code,
+            createdAt
+        } = this.props;
+
+        const {
+            stateName,
+            stateCode,
+            stateCreatedAt
+        } = this.state;
+
+        return (
+            <Container fluid>
+                <Form>
+                    <FormGroup>
+                        <Label for="name">Pais: </Label>
+                        <Input
+                            key="name"
+                            type="text"
+                            name="name"
+                            id="name"
+                            placeholder="Escribe el Nombre del Pais"
+                            value={stateName}
+                            onChange={
+                                ({ target: { value } }) => this.handleChange(value, 'stateName')
+                            }
+                            required
+                        />
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="code">Codigo: </Label>
+                        <Input
+                            key="code"
+                            type="text"
+                            name="code"
+                            id="code"
+                            placeholder="Escribe el Codigo del Pais"
+                            value={stateCode}
+                            onChange={
+                                ({ target: { value } }) => this.handleChange(value, 'stateCode')
+                            }
+                            required
+                        />
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="createdAt">Creado </Label>
+                        <Input
+                            key="createdAt"
+                            type="number"
+                            name="createdAt"
+                            id="createdAt"
+                            placeholder="Escribe el numero Creado"
+                            value={stateCreatedAt}
+                            onChange={
+                                ({ target: { value } }) => this.handleChange(value, 'stateCreatedAt')
+                            }
+                            required
+                        />
+                    </FormGroup>
+                    <Button
+                    tag={Link} color="primary" className="badge-pill" to={`../country`} >
+                        Enviar Modificacion
+                    </Button>
+                </Form>
+            </Container>
+        );
+    }
+}
+
 export default Edit;
