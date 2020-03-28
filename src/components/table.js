@@ -22,7 +22,7 @@ export default ({ data, columns, headers, onSort, limit, total, onPageClick, cur
         <Row>
             <Col>
                 <Table bordered size="sm" hovered dark className="table table-striped table-bordered text-center">
-                    <thead> 
+                    <thead>
                         <tr>
                             {map(headers, header => (
                                 <th onClick={() => onSort(header)}>
@@ -36,7 +36,7 @@ export default ({ data, columns, headers, onSort, limit, total, onPageClick, cur
                         </tr>
                     </thead>
                     <tbody>
-                    {map(data, d => (
+                        {map(data, d => (
                             <tr key={d.id} className={d.deleted ? "bg-danger" : ""}>
                                 {map(columns, column => {
                                     if (column === 'actions') {
@@ -48,32 +48,36 @@ export default ({ data, columns, headers, onSort, limit, total, onPageClick, cur
                                     return (<td>{get(d, column)}</td>);
                                 })}
                             </tr>
-                      ))}
+                        ))}
                     </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colSpan={columns.length}>
-                                <Pagination aria-label="Page navigation example">
-                                    <PaginationItem>
-                                        <PaginationLink first onClick={() => onPageClick(0)} />
-                                    </PaginationItem>
-                                    <PaginationItem>
-                                        <PaginationLink previous onClick={() => onPageClick(currentPage - 1)} />
-                                    </PaginationItem>
-                                    {times(ceil(total / toNumber(limit)), it => (
+                </Table>
+                <Table>
+                    <thead>
+                        <center>
+                            <tr>
+                                <td colSpan={columns.length} >
+                                    <Pagination aria-label="Page navigation example">
                                         <PaginationItem>
-                                            <PaginationLink onClick={() => onPageClick(it)}>
-                                                {it + 1}
-                                            </PaginationLink>
+                                            <PaginationLink first onClick={() => onPageClick(0)} />
                                         </PaginationItem>
-                                    ))}
-                                    <PaginationItem>
-                                        <PaginationLink next onClick={() => onPageClick(currentPage + 1)} />
-                                    </PaginationItem>
-                                </Pagination>
-                            </td>
-                        </tr>
-                    </tfoot>
+                                        <PaginationItem>
+                                            <PaginationLink previous onClick={() => onPageClick(currentPage - 1)} />
+                                        </PaginationItem>
+                                        {times(ceil(total / toNumber(limit)), it => (
+                                            <PaginationItem>
+                                                <PaginationLink onClick={() => onPageClick(it)}>
+                                                    {it + 1}
+                                                </PaginationLink>
+                                            </PaginationItem>
+                                        ))}
+                                        <PaginationItem>
+                                            <PaginationLink next onClick={() => onPageClick(currentPage + 1)} />
+                                        </PaginationItem>
+                                    </Pagination>
+                                </td>
+                            </tr>
+                        </center>
+                    </thead>
                 </Table>
             </Col>
         </Row>
