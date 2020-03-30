@@ -49,7 +49,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     fetchCar: id => dispatch(fetchCarRequested(id)),
-    submitCarData: () => dispatch(submitCarDataRequested()),
+    submitCarData: car => dispatch(submitCarDataRequested(car)),
     updateCar: car => dispatch(updateCarData(car))
 });
 
