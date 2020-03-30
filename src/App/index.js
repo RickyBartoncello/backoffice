@@ -6,7 +6,7 @@ import {
     Link
 } from "react-router-dom";
 
-import Cars from '../pages/Car/List/Component';
+import Cars from '../pages/Car';
 import Country from '../pages/Country';
 import Home from '../pages/Home';
 import Instruments from '../pages/Instrument';

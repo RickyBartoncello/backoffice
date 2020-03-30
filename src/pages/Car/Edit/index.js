@@ -4,11 +4,7 @@ import set from 'lodash/set';
 import map from 'lodash/map';
 
 import {
-<<<<<<< HEAD
     fetchCarRequested,
-=======
-    fetchCarsRequested,
->>>>>>> 01dc7665da9634571f1432fcf697ecf4fa836648
     submitCarDataRequested,
     updateCarData
 } from '../../../actions/car';
@@ -52,13 +48,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-<<<<<<< HEAD
     fetchCar: id => dispatch(fetchCarRequested(id)),
-    submitCarData: car => dispatch(submitCarDataRequested(car)),
-=======
-    fetchCar: id => dispatch(fetchCarsRequested(id)),
     submitCarData: () => dispatch(submitCarDataRequested()),
->>>>>>> 01dc7665da9634571f1432fcf697ecf4fa836648
     updateCar: car => dispatch(updateCarData(car))
 });
 

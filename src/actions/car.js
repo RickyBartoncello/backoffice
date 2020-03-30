@@ -21,7 +21,6 @@ export const submitCarDataSucceeded = constant({type: SUBMIT_CAR_DATA_SUCCEEDED}
 
 export const UPDATE_CAR_DATA = 'UPDATE_CAR_DATA';
 
-<<<<<<< HEAD
 export const updateCarData = cart => ({type: UPDATE_CAR_DATA, cart});
 
 export const FETCH_CAR_REQUESTED = 'FETCH_CAR_REQUESTED'; // Accion | Action
@@ -32,6 +31,3 @@ export const fetchCarSucceeded = car => ({
     type: FETCH_CAR_SUCCEEDED,
     car
 }) // Disparador o Action Creator
-=======
-export const updateCarData = cart => ({type: UPDATE_CAR_DATA, cart});
->>>>>>> 01dc7665da9634571f1432fcf697ecf4fa836648

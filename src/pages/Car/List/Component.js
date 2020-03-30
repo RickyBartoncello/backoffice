@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, {PureComponent} from 'react';
 import {
     Button,
     Col,
@@ -7,7 +7,7 @@ import {
     Spinner
 } from 'reactstrap';
 
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 import Table from '../../../components/table';
 
@@ -30,9 +30,6 @@ class CarTable extends PureComponent {
             <Container>
                 <Row>
                     <Col>
-                        <h3>Tabla de datos </h3>
-                    </Col>
-                    <Col>
                         <Button
                             className="float-right"
                             color="primary"
@@ -44,7 +41,7 @@ class CarTable extends PureComponent {
                         </Button>
                     </Col>
                 </Row>
-                <hr />
+                <hr/>
                 <Row>
                     <Col>
                         {loading && (
@@ -59,7 +56,7 @@ class CarTable extends PureComponent {
                                 total,
                                 onPageClick: this.handlePagination,
                                 linkTo: "cars"
-                            }} />
+                            }}/>
                         )}
                     </Col>
                 </Row>
