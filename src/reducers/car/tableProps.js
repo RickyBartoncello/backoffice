@@ -23,7 +23,7 @@ const initialState = {
         },
         {
             id: 'year',
-            label: 'Ano',
+            label: 'Año',
             sort: 'desc'
         },
         {

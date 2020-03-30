@@ -1,39 +1,102 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-    fetchQuotesRequested
-} from '../../actions/quote'
+import React, { PureComponent } from 'react';
+import { Link } from 'react-router-dom';
 
-const Edit = (props) => {
-    console.log(props);
-    const dispatch = useDispatch();
-    const [quotes] = useSelector(state => state.quote.documents.quotes);
-    if (props.match.params.code) {
-        // eslint-disable-next-line react-hooks/rules-of-hooks
-        useEffect(() => dispatch(fetchQuotesRequested(props.match.params)), [
-            dispatch,
-            props.match.params
-        ]);
+import {
+    Container,
+    Row,
+    Col,
+    Button,
+    Form,
+    FormGroup,
+    Label,
+    Input
+} from 'reactstrap';
+
+class Edit extends PureComponent {
+    constructor(props) {
+        super(props);
+        this.state = {
+            stateText: '',
+            stateAuthor: '',
+            stateCreatedAt: ''
+        };
     }
 
-    return (
-        <div>
-            <center><h3><b>Edicion del Poema</b></h3></center>
-            <form className="text-center">
-                <label for="text">
-                    Poema:
-                <input id="text" type="text" text="text" placeholder="Entrada del Texto" required />
-                </label>
-                <br />
-                <br />
-                <label for="author">
-                    Autor del Poema:
-                <input id="author" type="text" author="author" placeholder="Entrada del Autor" required />
-                </label>
-                <br />
-                <input type="submit" value="Enviar Modificacion" />
-            </form>
-        </div>
-    )
-};
+    handleChange(value, property) {
+        this.setState(
+            () => ({ [property]: value })
+        );
+    }
+
+    render() {
+        const {
+            text,
+            author,
+            createdAt
+        } = this.props;
+
+        const {
+            stateText,
+            stateAuthor,
+            stateCreatedAt
+        } = this.state;
+
+        return (
+            <Container fluid>
+                <Form>
+                    <FormGroup>
+                        <Label for="text">Poema: </Label>
+                        <Input
+                            key="text"
+                            type="text"
+                            text="text"
+                            id="text"
+                            placeholder="Escribe el Nombre del Poema"
+                            value={stateText}
+                            onChange={
+                                ({ target: { value } }) => this.handleChange(value, 'stateText')
+                            }
+                            required
+                        />
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="author">Autor: </Label>
+                        <Input
+                            key="author"
+                            type="text"
+                            text="author"
+                            id="author"
+                            placeholder="Escribe el Autor del Poema"
+                            value={stateAuthor}
+                            onChange={
+                                ({ target: { value } }) => this.handleChange(value, 'stateAuthor')
+                            }
+                            required
+                        />
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="createdAt">Creado </Label>
+                        <Input
+                            key="createdAt"
+                            type="number"
+                            text="createdAt"
+                            id="createdAt"
+                            placeholder="Escribe el numero Creado"
+                            value={stateCreatedAt}
+                            onChange={
+                                ({ target: { value } }) => this.handleChange(value, 'stateCreatedAt')
+                            }
+                            required
+                        />
+                    </FormGroup>
+                    <Button
+                    tag={Link} color="primary" classtext="badge-pill" to={`../quotes`} >
+                        Enviar Modificacion
+                    </Button>
+                </Form>
+            </Container>
+        );
+    }
+}
+
 export default Edit;

@@ -7,8 +7,7 @@ const initialState = {
     columns: [
         'family',
         'instrument',
-        'actions',
-        'delete'
+        'actions'
     ],
     headers: [
         {

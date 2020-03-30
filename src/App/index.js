@@ -19,7 +19,7 @@ export default function BasicExample() {
                 <nav className="bg-dark">
                     <figure>
                         &nbsp;&nbsp;&nbsp;
-                        <Link to="/"><img src='.\logo192.png' width='50' height='50'></img> </Link>
+                        <Link to="/"><img src='./logo192.png' width='50' height='50' alt="algo"/> </Link>
                         <div className="text-center p-2">
                         &nbsp;&nbsp;&nbsp;
                             <Link to="/cars">Cars</Link>

@@ -1,39 +1,85 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-    fetchInstrumentsRequested
-} from '../../actions/instrument'
+import React, { PureComponent } from 'react';
+import { Link } from 'react-router-dom';
 
-const Edit = (props) => {
-    console.log(props);
-    const dispatch = useDispatch();
-    const [instruments] = useSelector(state => state.instrument.documents.instruments);
-    if (props.match.params.code) {
-        // eslint-disable-next-line react-hooks/rules-of-hooks
-        useEffect(() => dispatch(fetchInstrumentsRequested(props.match.params)), [
-            dispatch,
-            props.match.params
-        ]);
+import {
+    Container,
+    Row,
+    Col,
+    Button,
+    Form,
+    FormGroup,
+    Label,
+    Input
+} from 'reactstrap';
+
+class Edit extends PureComponent {
+    constructor(props) {
+        super(props);
+        this.state = {
+            stateFamily: '',
+            stateInstrument: '',
+            stateCreatedAt: ''
+        };
     }
 
-    return (
-        <div>
-            <center><h3><b>Edicion del Instrumento</b></h3></center>
-            <form className="text-center">
-                <label for="family">
-                    Familia del Instrumento: 
-                <input id="family" type="text" family="family" placeholder="Entrada de la familia" required/>
-                </label>
-                <br/>
-                <br/>
-                <label for="name">
-                    Nombre del Instrumento:
-                <input id="name" type="text" instrument="instrument" placeholder="Entrada del instrumento" required />
-                </label>
-                <br/>
-                <input type="submit" value="Enviar Modificacion" />
-            </form>
-        </div>
-    )
-};
+    handleChange(value, property) {
+        this.setState(
+            () => ({ [property]: value })
+        );
+    }
+
+    render() {
+        const {
+            family,
+            instrument
+        } = this.props;
+
+        const {
+            stateFamily,
+            stateInstrument
+        } = this.state;
+
+        return (
+            <Container fluid>
+                <Form>
+                    <FormGroup>
+                        <Label for="family">Familia: </Label>
+                        <Input
+                            key="family"
+                            type="text"
+                            family="family"
+                            id="family"
+                            placeholder="Escribe la Familia del Instrumento"
+                            value={stateFamily}
+                            onChange={
+                                ({ target: { value } }) => this.handleChange(value, 'stateFamily')
+                            }
+                            required
+                        />
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="instrument">Instrumento: </Label>
+                        <Input
+                            key="instrument"
+                            type="text"
+                            family="instrument"
+                            id="instrument"
+                            placeholder="Escribe el Nombre del Instrumento"
+                            value={stateInstrument}
+                            onChange={
+                                ({ target: { value } }) => this.handleChange(value, 'stateInstrument')
+                            }
+                            required
+                        />
+                    </FormGroup>
+                    <Button
+                    tag={Link} color="primary" classfamily="badge-pill" to={`../instruments`} >
+                        Enviar Modificacion
+                    </Button>
+                </Form>
+            </Container>
+        );
+    }
+}
+
 export default Edit;
