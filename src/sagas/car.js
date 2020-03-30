@@ -24,6 +24,7 @@ export function* fetchCar({id}) {
 
 export function* submitCarData() {
     const car = yield select(state => state.cars.car);
+    console.log(car);
     const result = yield call(CarAPI.submitCar, car);
     if (result.success) {
         yield put(

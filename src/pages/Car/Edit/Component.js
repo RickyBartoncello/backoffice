@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react';
 import map from 'lodash/map';
+import { Link } from 'react-router-dom';
 import {
     Container,
     Row,
