@@ -3,8 +3,6 @@ import map from 'lodash/map';
 import { Link } from 'react-router-dom';
 import {
     Container,
-    Row,
-    Col,
     Button,
     Form,
     FormGroup,

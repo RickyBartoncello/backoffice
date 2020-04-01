@@ -4,60 +4,53 @@ import set from 'lodash/set';
 import map from 'lodash/map';
 
 import {
-    fetchCarRequested,
-    submitCarDataRequested,
-    updateCarData
-} from '../../../actions/car';
+    fetchInstrumentRequested,
+    submitInstrumentDataRequested,
+    updateInstrumentData
+} from '../../../actions/instrument';
 
 import Component from './Component';
 
 const fields = [
     {
-        control: 'brand',
-        label: 'Marca',
-        path: 'brand',
+        control: 'family',
+        label: 'Familia',
+        path: 'family',
         value: null,
         type: 'text'
     },
     {
-        control: 'model',
-        label: 'Modelo',
-        path: 'model',
+        control: 'instrument',
+        label: 'Instrumento',
+        path: 'instrument',
         value: null,
         type: 'text'
     },
-    {
-        control: 'year',
-        label: 'Ano',
-        path: 'year',
-        value: null,
-        type: 'number'
-    }
 ];
 
 const mapStateToProps = state => {
-    const car = get(state, 'car.documents.car', {});
+    const instrument = get(state, 'instrument.documents.instrument', {});
     const cFields = map(fields, field => ({
         ...field,
-        value: get(car, field.path, '')
+        value: get(instrument, field.path, '')
     }));
     return {
-        car,
+        instrument,
         fields: cFields
     };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    fetchCar: id => dispatch(fetchCarRequested(id)),
-    submitCarData: car => dispatch(submitCarDataRequested(car)),
-    updateCar: car => dispatch(updateCarData(car))
+    fetchInstrument: id => dispatch(fetchInstrumentRequested(id)),
+    submitInstrumentData: instrument => dispatch(submitInstrumentDataRequested(instrument)),
+    updateInstrument: instrument => dispatch(updateInstrumentData(instrument))
 });
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
-    const {updateCar} = dispatchProps;
+    const {updateInstrument} = dispatchProps;
     const mergeFields = map(stateProps.fields, field => ({
         ...field,
-        onChange: ({target: {value}}) => updateCar(set(stateProps.car, field.path, value))
+        onChange: ({target: {value}}) => updateInstrument(set(stateProps.instrument, field.path, value))
     }));
     return {
         ...dispatchProps,

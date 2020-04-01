@@ -1,36 +1,20 @@
 import React, {PureComponent} from 'react';
-import Table from '../../components/table';
-import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
 import {
-    Container,
-    Button,
-    Row,
     Col,
+    Container,
+    Row,
     Spinner
 } from 'reactstrap';
 
-import {
-    fetchCountriesRequested,
-    sortCountry
-} from '../../actions/country'
 
-class App extends PureComponent {
+import Table from '../../../components/table';
+
+class CountryTable extends PureComponent {
     componentDidMount() {
-        this.props.getCountries();
+        this.props.fetchCountries();
     }
 
-    handlePagination = (skip) => {
-        this.props.getCountries({skip});
-    } 
-    removeCountry(index) {
-        this.setState({
-          countries: this.state.countries.filter((e, i) => {
-            return i !== index
-          })
-        });
-      }
-
+    handlePagination = a => console.log(a)
     render() {
         const {
             countries,
@@ -67,28 +51,8 @@ class App extends PureComponent {
                     </Col>
                 </Row>
             </Container>
-        )
+        );
     }
 }
 
-const mapStateToProps = (state /* nuestro Store */, ownProps /*  */ ) => {
-    const {documents: {countries, limit, total, loading}, tableProps} = state.country;
-    return {
-        tableProps,
-        countries,
-        limit,
-        total,
-        loading
-    };
-}
-
-const mapDispatchToProps = (dispatch /* acciones a disparar */, ownProps /*  */ ) => ({
-    getCountries: filters => dispatch(fetchCountriesRequested(filters)),
-    onSort: sort => dispatch(sortCountry(sort))
-})
-
-export default connect(
-    mapStateToProps, // MaspStateToProps 1
-    mapDispatchToProps // MapDispatchToProps 2
-    // MergeProps <<<<<  1 + 2 = 3
-)(App);
+export default CountryTable;

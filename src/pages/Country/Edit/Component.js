@@ -13,15 +13,16 @@ import {
 class FormBuilder extends PureComponent {
     componentDidMount() {
         if (this.props.match.params.id) {
-            this.props.fetchMovie(this.props.match.params.id);
+            this.props.fetchCountry(this.props.match.params.id);
         }
     }
 
     render() {
         const {
             fields,
-            submitMovieData
+            submitCountryData
         } = this.props;
+        console.log(fields, submitCountryData);
 
         return (
             <Container fluid>
@@ -40,10 +41,10 @@ class FormBuilder extends PureComponent {
                         </FormGroup>
                     ))}
                     <Button
-                        onClick={() => submitMovieData()}
+                        onClick={() => submitCountryData()}
                         tag={Link} color="primary" 
                         className="badge-pill" 
-                        to={`/movies/`}
+                        to={`/country/`}
                     >
                         Submit
                     </Button>

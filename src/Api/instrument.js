@@ -7,6 +7,17 @@ class Instrument {
         const filterObj = new URLSearchParams(filters).toString();
         return Http.get(`${API}?${filterObj}`);
     }
+    static fetchInstrument(id) {
+        return Http.get(`${API}/${id}`);
+    }
+
+    static submitInstrument(instrument) {
+        console.log(instrument);
+        if (!instrument.id) {
+            return Http.post(API, { ...instrument });
+        }
+        return Http.put(`${API}/${instrument.id}`, { ...instrument });
+    }
 }
 
 export default Instrument;

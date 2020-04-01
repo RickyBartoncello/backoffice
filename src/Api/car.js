@@ -7,7 +7,6 @@ class Car {
         const filterObj = new URLSearchParams(filters).toString();
         return Http.get(`${API}?${filterObj}`);
     }
-
     static fetchCar(id) {
         return Http.get(`${API}/${id}`);
     }
