@@ -1,29 +1,29 @@
 import find from 'lodash/find';
 import {
-    SORT_QUOTE
-} from '../../actions/quote';
+    SORT_MOVIE
+} from '../../actions/movie';
 
 const initialState = {
     columns: [
-        'text',
-        'author',
-        'createdAt',
+        'title',
+        'genres',
+        'year',
         'actions'
     ],
     headers: [
         {
-            id: 'text',
-            label: 'Texto',
+            id: 'title',
+            label: 'Titulo',
             sort: 'desc'
         },
         {
-            id: 'author',
-            label: 'Autor',
+            id: 'genres',
+            label: 'Genero',
             sort: 'desc'
         },
         {
-            id: 'createdAt',
-            label: 'Creado',
+            id: 'year',
+            label: 'Ano',
             sort: 'desc'
         },
         {
@@ -35,7 +35,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case SORT_QUOTE:
+        case SORT_MOVIE:
             const sortedOption = find(state.headers, header => header.id === action.sort.id);
             sortedOption.sort = sortedOption.sort === 'desc' ? 'asc' : 'desc';
             return state

@@ -20,7 +20,6 @@ import toNumber from 'lodash/toNumber';
 export default ({ data, columns, headers, onSort, limit, total, onPageClick, currentPage, linkTo }) => (
     <Container fluid>
         <Row>
-                {console.log(data)}
             <Col>
                 <Table bordered size="sm" hovered dark className="table table-striped table-bordered text-center">
                     <thead>

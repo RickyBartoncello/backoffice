@@ -46,9 +46,6 @@ class App extends PureComponent {
                     <Col>
                         <h3>Tabla de datos </h3>
                     </Col>
-                    <Col sm="0">
-                        <Button color="primary" tag={Link} to="/country/edit/new"> Nuevo </Button>
-                    </Col>
                 </Row>
                 <hr/>
                 <Row>

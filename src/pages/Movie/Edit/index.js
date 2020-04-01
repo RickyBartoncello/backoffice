@@ -4,60 +4,60 @@ import set from 'lodash/set';
 import map from 'lodash/map';
 
 import {
-    fetchCarRequested,
-    submitCarDataRequested,
-    updateCarData
-} from '../../../actions/car';
+    fetchMovieRequested,
+    submitMovieDataRequested,
+    updateMovieData
+} from '../../../actions/movie';
 
 import Component from './Component';
 
 const fields = [
     {
-        control: 'brand',
-        label: 'Marca',
-        path: 'brand',
+        control: 'title',
+        label: 'Titulo',
+        path: 'title',
         value: null,
         type: 'text'
     },
     {
-        control: 'model',
-        label: 'Modelo',
-        path: 'model',
+        control: 'genres',
+        label: 'Genero',
+        path: 'genres',
         value: null,
         type: 'text'
     },
     {
-        control: 'Year',
+        control: 'year',
         label: 'Ano',
-        path: 'Year',
+        path: 'year',
         value: null,
         type: 'number'
     }
 ];
 
 const mapStateToProps = state => {
-    const car = get(state, 'car.documents.car', {});
+    const movie = get(state, 'movie.documents.movie', {});
     const cFields = map(fields, field => ({
         ...field,
-        value: get(car, field.path, '')
+        value: get(movie, field.path, '')
     }));
     return {
-        car,
+        movie,
         fields: cFields
     };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    fetchCar: id => dispatch(fetchCarRequested(id)),
-    submitCarData: car => dispatch(submitCarDataRequested(car)),
-    updateCar: car => dispatch(updateCarData(car))
+    fetchMovie: id => dispatch(fetchMovieRequested(id)),
+    submitMovieData: movie => dispatch(submitMovieDataRequested(movie)),
+    updateMovie: movie => dispatch(updateMovieData(movie))
 });
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
-    const {updateCar} = dispatchProps;
+    const {updateMovie} = dispatchProps;
     const mergeFields = map(stateProps.fields, field => ({
         ...field,
-        onChange: ({target: {value}}) => updateCar(set(stateProps.car, field.path, value))
+        onChange: ({target: {value}}) => updateMovie(set(stateProps.movie, field.path, value))
     }));
     return {
         ...dispatchProps,

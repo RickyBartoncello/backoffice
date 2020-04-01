@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React, { PureComponent } from 'react';
 import {
     Button,
     Col,
@@ -7,19 +7,19 @@ import {
     Spinner
 } from 'reactstrap';
 
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import Table from '../../../components/table';
 
-class CarTable extends PureComponent {
+class MovieTable extends PureComponent {
     componentDidMount() {
-        this.props.fetchCars();
+        this.props.fetchMovies();
     }
 
     handlePagination = a => console.log(a)
     render() {
         const {
-            cars,
+            movies,
             limit,
             total,
             tableProps,
@@ -38,13 +38,13 @@ class CarTable extends PureComponent {
                             color="primary"
                             size="lg"
                             tag={Link}
-                            to="/cars/Edit/new"
+                            to="/movies/Edit/new"
                         >
                             Nuevo
                         </Button>
                     </Col>
                 </Row>
-                <hr/>
+                <hr />
                 <Row>
                     <Col>
                         {loading && (
@@ -52,14 +52,14 @@ class CarTable extends PureComponent {
                         )}
                         {!loading && (
                             <Table {...{
-                                data: cars,
+                                data: movies,
                                 ...tableProps,
                                 onSort,
                                 limit,
                                 total,
                                 onPageClick: this.handlePagination,
-                                linkTo: "cars"
-                            }}/>
+                                linkTo: "movies"
+                            }} />
                         )}
                     </Col>
                 </Row>
@@ -68,4 +68,4 @@ class CarTable extends PureComponent {
     }
 }
 
-export default CarTable;
+export default MovieTable;

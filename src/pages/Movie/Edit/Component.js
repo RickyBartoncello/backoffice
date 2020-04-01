@@ -15,14 +15,14 @@ import {
 class FormBuilder extends PureComponent {
     componentDidMount() {
         if (this.props.match.params.id) {
-            this.props.fetchCar(this.props.match.params.id);
+            this.props.fetchMovie(this.props.match.params.id);
         }
     }
 
     render() {
         const {
             fields,
-            submitCarData
+            submitMovieData
         } = this.props;
 
         return (
@@ -42,10 +42,10 @@ class FormBuilder extends PureComponent {
                         </FormGroup>
                     ))}
                     <Button
-                        onClick={() => submitCarData()}
+                        onClick={() => submitMovieData()}
                         tag={Link} color="primary" 
                         className="badge-pill" 
-                        to={`/cars/`}
+                        to={`/movies/`}
                     >
                         Submit
                     </Button>

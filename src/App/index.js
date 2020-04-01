@@ -10,7 +10,7 @@ import Cars from '../pages/Car';
 import Country from '../pages/Country';
 import Home from '../pages/Home';
 import Instruments from '../pages/Instrument';
-import Quote from '../pages/Quote';
+import Movie from '../pages/Movie';
 
 export default function BasicExample() {
     return (
@@ -28,7 +28,7 @@ export default function BasicExample() {
                             &nbsp;&nbsp;&nbsp;
                             <Link to="/instruments">Instruments</Link>
                             &nbsp;&nbsp;&nbsp;
-                            <Link to="/quotes">Quotes</Link>
+                            <Link to="/movies">Movies</Link>
                         </div>
                     </figure>
                 </nav>
@@ -38,7 +38,7 @@ export default function BasicExample() {
                     <Route path="/cars" component={Cars} />
                     <Route path="/country" component={Country} />
                     <Route path="/instruments" component={Instruments} />
-                    <Route path="/quotes" component={Quote} />
+                    <Route path="/movies" component={Movie} />
                 </Switch>
             </>
         </Router>

@@ -23,7 +23,7 @@ export function* fetchCar({id}) {
 }
 
 export function* submitCarData() {
-    const car = yield select(state => state.cars.car);
+    const car = yield select(state => state.car.documents.car);
     const result = yield call(CarAPI.submitCar, car);
     if (result.success) {
         yield put(
