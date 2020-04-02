@@ -22,7 +22,6 @@ class FormBuilder extends PureComponent {
             fields,
             submitCountryData
         } = this.props;
-        console.log(fields, submitCountryData);
 
         return (
             <Container fluid>
@@ -46,7 +45,7 @@ class FormBuilder extends PureComponent {
                         className="badge-pill" 
                         to={`/country/`}
                     >
-                        Submit
+                        Enviar
                     </Button>
                 </Form>
             </Container>

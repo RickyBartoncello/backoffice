@@ -1,4 +1,4 @@
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import get from 'lodash/get';
 import set from 'lodash/set';
 import map from 'lodash/map';
@@ -47,10 +47,10 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 });
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
-    const {updateInstrument} = dispatchProps;
+    const { updateInstrument } = dispatchProps;
     const mergeFields = map(stateProps.fields, field => ({
         ...field,
-        onChange: ({target: {value}}) => updateInstrument(set(stateProps.instrument, field.path, value))
+        onChange: ({ target: { value } }) => updateInstrument(set(stateProps.instrument, field.path, value))
     }));
     return {
         ...dispatchProps,
@@ -64,3 +64,4 @@ export default connect(
     mapDispatchToProps,
     mergeProps
 )(Component);
+

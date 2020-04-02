@@ -1,11 +1,11 @@
-import {call, put, delay, select} from 'redux-saga/effects';
+import { call, put, delay, select } from 'redux-saga/effects';
 
 import InstrumentAPI from '../Api/instrument';
-import { fetchInstrumentsSucceeded, submitInstrumentDataSucceeded, fetchInstrumentSucceeded} from '../actions/instrument';
+import {fetchInstrumentsSucceeded, submitInstrumentDataSucceeded, fetchInstrumentSucceeded} from '../actions/instrument';
 
-export function* fetchInstruments({filter}) {
+export function* fetchInstruments({ filter }) {
     try {
-        const {instruments, limit, total} = yield call( InstrumentAPI.fetch, filter );
+        const { instruments, limit, total } = yield call(InstrumentAPI.fetch, filter);
         yield delay(1500);
         yield put(
             fetchInstrumentsSucceeded(instruments, limit, total)

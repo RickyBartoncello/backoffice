@@ -1,11 +1,10 @@
-import React, {PureComponent} from 'react';
+import React, { PureComponent } from 'react';
 import {
     Col,
     Container,
     Row,
     Spinner
 } from 'reactstrap';
-
 
 import Table from '../../../components/table';
 
@@ -31,7 +30,7 @@ class CountryTable extends PureComponent {
                         <h3>Tabla de datos </h3>
                     </Col>
                 </Row>
-                <hr/>
+                <hr />
                 <Row>
                     <Col>
                         {loading && (
@@ -46,7 +45,7 @@ class CountryTable extends PureComponent {
                                 total,
                                 onPageClick: this.handlePagination,
                                 linkTo: "country"
-                            }}/>
+                            }} />
                         )}
                     </Col>
                 </Row>

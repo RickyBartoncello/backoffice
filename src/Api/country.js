@@ -7,6 +7,7 @@ class Country {
         const filterObj = new URLSearchParams(filters).toString();
         return Http.get(`${API}?${filterObj}`);
     }
+
     static fetchCountry(id) {
         return Http.get(`${API}/${id}`);
     }

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Switch, Route} from 'react-router-dom';
+import {Switch,Route} from 'react-router-dom';
 
 import List from './List';
 import Edit from './Edit';
@@ -14,3 +14,4 @@ const Instrument = ({match: {path}}) => (
 
 
 export default Instrument;
+

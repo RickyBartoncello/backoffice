@@ -11,7 +11,7 @@ class Countries {
         return Http.get(`${API}/${id}`);
     }
 
-    static submitCountry(country) {
+    static submitcountry(country) {
         if (!country.id) {
             return Http.post(API, {...country});
         }

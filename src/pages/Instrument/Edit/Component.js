@@ -45,7 +45,7 @@ class FormBuilder extends PureComponent {
                         className="badge-pill" 
                         to={`/instruments/`}
                     >
-                        Submit
+                        Enviar
                     </Button>
                 </Form>
             </Container>

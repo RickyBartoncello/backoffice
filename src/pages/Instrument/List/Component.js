@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React, { PureComponent } from 'react';
 import {
     Button,
     Col,
@@ -7,7 +7,7 @@ import {
     Spinner
 } from 'reactstrap';
 
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import Table from '../../../components/table';
 
@@ -44,7 +44,7 @@ class InstrumentTable extends PureComponent {
                         </Button>
                     </Col>
                 </Row>
-                <hr/>
+                <hr />
                 <Row>
                     <Col>
                         {loading && (
@@ -59,7 +59,7 @@ class InstrumentTable extends PureComponent {
                                 total,
                                 onPageClick: this.handlePagination,
                                 linkTo: "instruments"
-                            }}/>
+                            }} />
                         )}
                     </Col>
                 </Row>
@@ -69,3 +69,4 @@ class InstrumentTable extends PureComponent {
 }
 
 export default InstrumentTable;
+

@@ -14,7 +14,7 @@ import Component from './Component';
 const fields = [
     {
         control: 'name',
-        label: 'Nombre',
+        label: 'Name',
         path: 'name',
         value: null,
         type: 'text'
@@ -27,9 +27,9 @@ const fields = [
         type: 'text'
     },
     {
-        control: 'year',
-        label: 'Ano',
-        path: 'year',
+        control: 'createdAt',
+        label: 'Problacion',
+        path: 'createdAt',
         value: null,
         type: 'number'
     }

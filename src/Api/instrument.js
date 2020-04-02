@@ -7,6 +7,7 @@ class Instrument {
         const filterObj = new URLSearchParams(filters).toString();
         return Http.get(`${API}?${filterObj}`);
     }
+
     static fetchInstrument(id) {
         return Http.get(`${API}/${id}`);
     }

@@ -19,16 +19,16 @@ export default function BasicExample() {
                 <nav className="bg-dark">
                     <figure>
                         &nbsp;&nbsp;&nbsp;
-                        <Link to="/"><img src='./logo192.png' width='50' height='50' alt="algo"/> </Link>
+                        <Link to="/"><img src='./logo192.png' width='50' height='50' alt="HOME"/> </Link>
                         <div className="text-center p-2">
                         &nbsp;&nbsp;&nbsp;
-                            <Link to="/cars">Cars</Link>
+                            <Link to="/cars">Autos</Link>
                             &nbsp;&nbsp;&nbsp;
-                            <Link to="/country">Countries</Link>
+                            <Link to="/country">Paises</Link>
                             &nbsp;&nbsp;&nbsp;
-                            <Link to="/instruments">Instruments</Link>
+                            <Link to="/instruments">Instrumentos</Link>
                             &nbsp;&nbsp;&nbsp;
-                            <Link to="/movies">Movies</Link>
+                            <Link to="/movies">Peliculas</Link>
                         </div>
                     </figure>
                 </nav>
