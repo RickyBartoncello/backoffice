@@ -17,6 +17,10 @@ class Cars {
         }
         return Http.put(`${API}/${car.id}`, {...car});
     }
+
+    static deleteCar(id) {
+        return Http.delete(`${API}/${id}`, {...id});
+    }
 }
 
 export default Cars;

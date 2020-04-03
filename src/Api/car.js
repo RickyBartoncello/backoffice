@@ -18,6 +18,14 @@ class Car {
         }
         return Http.put(`${API}/${car.id}`, { ...car });
     }
+
+    static fetchCars() {
+        return Http.get(API);
+    }
+
+    static deleteCar(id) {
+        return Http.delete(`${API}/${id}`, { ...id });
+    }
 }
 
 export default Car

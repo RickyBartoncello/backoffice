@@ -1,7 +1,7 @@
 import { call, put, delay, select } from 'redux-saga/effects';
 
 import CarAPI from '../Api/car';
-import {fetchCarsSucceeded, submitCarDataSucceeded, fetchCarSucceeded} from '../actions/car';
+import {fetchCarsSucceeded, submitCarDataSucceeded, fetchCarSucceeded, deleteCarSucceeded} from '../actions/car';
 
 export function* fetchCars({ filter }) {
     try {
@@ -30,4 +30,11 @@ export function* submitCarData() {
             submitCarDataSucceeded()
         );
     }
+}
+
+export function* deleteCar({id}) {
+    const success = yield call(CarAPI.deleteCar, id);
+    yield put(
+        deleteCarSucceeded(success)
+    );
 }

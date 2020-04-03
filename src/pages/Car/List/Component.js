@@ -38,7 +38,7 @@ class CarTable extends PureComponent {
                             color="primary"
                             size="lg"
                             tag={Link}
-                            to="/cars/Edit/new"
+                            to="/cars/edit/new"
                         >
                             Nuevo
                         </Button>
@@ -51,7 +51,7 @@ class CarTable extends PureComponent {
                             <Spinner color="danger" />
                         )}
                         {!loading && (
-                            <Table {...{
+                            <Table bordered condensed hover stripped size="sm"{...{
                                 data: cars,
                                 ...tableProps,
                                 onSort,

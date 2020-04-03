@@ -17,6 +17,10 @@ class Movies {
         }
         return Http.put(`${API}/${movie.id}`, {...movie});
     }
+
+    static deleteMovie(id) {
+        return Http.delete(`${API}/${id}`, {...id});
+    }
 }
 
 export default Movies;

@@ -11,11 +11,14 @@ class Countries {
         return Http.get(`${API}/${id}`);
     }
 
-    static submitcountry(country) {
+    static submitCountry(country) {
         if (!country.id) {
             return Http.post(API, {...country});
         }
         return Http.put(`${API}/${country.id}`, {...country});
+    }
+    static deleteCountry(id) {
+        return Http.delete(`${API}/${id}`, {...id});
     }
 }
 
