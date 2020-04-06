@@ -2,13 +2,12 @@ import set from 'lodash/set';
 
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import {
-    submitCarDataRequested,
-    fetchCarRequested,
-    updateCarData
-} from '../../actions/car'
+    submitInstrumentDataRequested,
+    fetchInstrumentRequested,
+    updateInstrumentData
+} from '../../actions/instrument'
 
 import {
     Container,
@@ -23,30 +22,30 @@ import {
 
 
 
-const Car = (props) => {
+const Instrument = (props) => {
     console.log(props);
     const dispatch = useDispatch();
     const { id } = useParams();
-    const { car } = useSelector(state => state.car.documents);
-    console.log(car)
-    const [title, setTitle] = useState('Nuevo carro');
+    const { instrument } = useSelector(state => state.instrument.documents);
+    console.log(instrument)
+    const [title, setTitle] = useState('Nuevo instrumentro');
     const submit = () => {
-        dispatch(submitCarDataRequested())
+        dispatch(submitInstrumentDataRequested())
     }
-    console.log(id, car);
+    console.log(id, instrument);
     useEffect(
         () => {
             if (id && id.includes('-') && (id.match(/-/g) || []).length === 4) {
-                dispatch(fetchCarRequested(id));
-                setTitle('Edición del carro')
+                dispatch(fetchInstrumentRequested(id));
+                setTitle('Edición del instrumento')
             }
         }, [dispatch, id]);
 
 
 
     const handleChange = (value, path) => {
-        set(car, path, value);
-        dispatch(updateCarData(car)
+        set(instrument, path, value);
+        dispatch(updateInstrumentData(instrument)
         )
     }
 
@@ -57,44 +56,29 @@ const Car = (props) => {
             <Form onSubmit={() => submit()}>
                 <h3 sm={5}>{title}</h3>
                 <Row form>
-                    <Col md={2}>
+                    <Col>
                         <FormGroup>
-                            <Label for="exampleBrand">Marca</Label>
+                            <Label for="exampleFamily">Familia</Label>
                             <Input
                                 type="text"
-                                name="brand"
-                                id="exampleBrand"
-                                placeholder="ingrese la marca"
-                                onChange={({ target: { value } }) => handleChange(value, 'brand')}
-                                value={car.brand}
+                                name="family"
+                                id="exampleFamily"
+                                placeholder="ingrese la familia"
+                                onChange={({ target: { value } }) => handleChange(value, 'family')}
+                                value={instrument.family}
                             />
                         </FormGroup>
                     </Col>
-                    <Col md={2}>
+                    <Col>
                         <FormGroup>
-                            <Label for="exampleModel">Modelo</Label>
+                            <Label for="exampleInstrument">Instrumento</Label>
                             <Input
                                 type="text"
-                                name="model"
-                                id="exampleModel"
-                                placeholder="ingrese el modelo"
-                                onChange={({ target: { value } }) => handleChange(value, 'model')}
-                                value={car.model}
-                            />
-                        </FormGroup>
-                    </Col>
-                </Row>
-                <Row form>
-                    <Col md={4}>
-                        <FormGroup>
-                            <Label for="exampleYear">Año</Label>
-                            <Input
-                                type="text"
-                                name="year"
-                                id="exampleYear"
-                                placeholder="ingrese el año del carro"
-                                onChange={({ target: { value } }) => handleChange(value, 'year')}
-                                value={car.year}
+                                name="instrument"
+                                id="exampleInstrument"
+                                placeholder="ingrese el instrumento"
+                                onChange={({ target: { value } }) => handleChange(value, 'instrument')}
+                                value={instrument.instrument}
                             />
                         </FormGroup>
                     </Col>
@@ -102,9 +86,8 @@ const Car = (props) => {
                 <Row form>
                     <Col>
                         <Button onClick={() => submit()}
-                            tag={Link} color="primary"
+                            color="primary"
                             className="badge-pill"
-                            to={`/cars/`}
                         > Guardar </Button>
                     </Col>
                 </Row>
@@ -113,4 +96,4 @@ const Car = (props) => {
     )
 };
 
-export default Car;
+export default Instrument;

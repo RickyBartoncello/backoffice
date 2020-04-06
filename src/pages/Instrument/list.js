@@ -11,24 +11,23 @@ import {
 } from 'reactstrap';
 
 import {
-    fetchCarsRequested,
-    sortCar,
-    submitCarDataRequested,
-    deleteCarRequested
-} from '../../actions/car'
+    fetchInstrumentsRequested,
+    sortInstrument,
+    submitInstrumentDataRequested
+} from '../../actions/instrument'
 
 class App extends PureComponent {
     componentDidMount() {
-        this.props.getCars();
+        this.props.getInstruments();
     }
 
     handlePagination = (skip) => {
-        this.props.getCars({skip});
+        this.props.getInstruments({skip});
     } 
 
     render() {
         const {
-            cars,
+            instruments,
             limit,
             total,
             tableProps,
@@ -47,7 +46,7 @@ class App extends PureComponent {
                         color="primary"
                         size="lg"
                         tag={Link} 
-                        to="/cars/edit/new"> Nuevo </Button>
+                        to="/instruments/edit/new"> Nuevo </Button>
                     </Col>
                 </Row>
                 <hr/>
@@ -58,13 +57,13 @@ class App extends PureComponent {
                         )}
                         {!loading && (
                             <Table {...{
-                                data: cars,
+                                data: instruments,
                                 ...tableProps,
                                 onSort,
                                 limit,
                                 total,
                                 onPageClick: this.handlePagination,
-                                linkTo:'cars'
+                                linkTo:'instruments'
                             }}/>
                         )}
                     </Col>
@@ -75,10 +74,10 @@ class App extends PureComponent {
 }
 
 const mapStateToProps = (state /* nuestro Store */, ownProps /*  */ ) => {
-    const {documents: {cars, limit, total, loading}, tableProps} = state.car;
+    const {documents: {instruments, limit, total, loading}, tableProps} = state.instrument;
     return {
         tableProps,
-        cars,
+        instruments,
         limit,
         total,
         loading
@@ -86,10 +85,9 @@ const mapStateToProps = (state /* nuestro Store */, ownProps /*  */ ) => {
 }
 
 const mapDispatchToProps = (dispatch /* acciones a disparar */, ownProps /*  */ ) => ({
-    getCars: filters => dispatch(fetchCarsRequested(filters)),
-    onSort: sort => dispatch(sortCar(sort)),
-    submitCarData: () => dispatch(submitCarDataRequested()),
-    deleteCar: id => dispatch(deleteCarRequested(id))
+    getInstruments: filters => dispatch(fetchInstrumentsRequested(filters)),
+    onSort: sort => dispatch(sortInstrument(sort)),
+    submitInstrumentData: () => dispatch(submitInstrumentDataRequested())
 })
 
 export default connect(
