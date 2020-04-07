@@ -40,7 +40,7 @@ export default ({ data, columns, headers, onSort, limit, total, onPageClick, cur
                                     if (column === 'actions') {
                                         return (<td >
                                             <Button tag={Link} color="primary" className="badge-pill" to={`${linkTo}/edit/${d.id}`}> Edición  </Button>
-                                            <Button tag={Link} className="badge-pill badge-danger">  Delete </Button>
+                                            <Button tag={Link} className="badge-pill badge-danger" to={`${linkTo}/delete/${d.id}`}> Eliminar </Button>  
                                         </td>);
                                     }
                                     return (<td>{get(d, column)}</td>);
@@ -49,34 +49,34 @@ export default ({ data, columns, headers, onSort, limit, total, onPageClick, cur
                         ))}
                     </tbody>
                 </Table>
-                <Table>
-                    <thead>
-                        <center>
-                            <tr>
-                                <td colSpan={columns.length} >
-                                    <Pagination aria-label="Page navigation example">
+                <div align="center">
+                    <tfoot>
+                        <tr>
+                            <td colSpan={columns.length}>
+                                <Pagination aria-label="Page navigation example">
+                                    <PaginationItem>
+                                        <PaginationLink first onClick={() => onPageClick(0)} />
+                                    </PaginationItem>
+                                    <PaginationItem>
+                                        <PaginationLink previous onClick={() => onPageClick(currentPage - 1)} />
+                                    </PaginationItem>
+                                    {times(ceil(total / toNumber(limit)), it => (
                                         <PaginationItem>
-                                            <PaginationLink first onClick={() => onPageClick(0)} />
+                                            <PaginationLink onClick={() => onPageClick(it)}>
+                                                {it + 1}
+                                            </PaginationLink>
                                         </PaginationItem>
-                                        <PaginationItem>
-                                            <PaginationLink previous onClick={() => onPageClick(currentPage - 1)} />
-                                        </PaginationItem>
-                                        {times(ceil(total / toNumber(limit)), it => (
-                                            <PaginationItem>
-                                                <PaginationLink onClick={() => onPageClick(it)}>
-                                                    {it + 1}
-                                                </PaginationLink>
-                                            </PaginationItem>
-                                        ))}
-                                        <PaginationItem>
-                                            <PaginationLink next onClick={() => onPageClick(currentPage + 1)} />
-                                        </PaginationItem>
-                                    </Pagination>
-                                </td>
-                            </tr>
-                        </center>
-                    </thead>
-                </Table>
+                                    ))}
+                                    <PaginationItem>
+                                        <PaginationLink next onClick={() => onPageClick(currentPage + 1)} />
+                                    </PaginationItem>
+
+                                </Pagination>
+
+                            </td>
+                        </tr>
+                    </tfoot>
+                </div>
             </Col>
         </Row>
     </Container>

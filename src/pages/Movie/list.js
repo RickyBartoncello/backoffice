@@ -11,24 +11,23 @@ import {
 } from 'reactstrap';
 
 import {
-    fetchCarsRequested,
-    sortCar,
-    submitCarDataRequested,
-    deleteCarRequested
-} from '../../actions/car'
+    fetchMoviesRequested,
+    sortMovie,
+    submitMovieDataRequested
+} from '../../actions/movie'
 
 class App extends PureComponent {
     componentDidMount() {
-        this.props.getCars();
+        this.props.getMovies();
     }
 
     handlePagination = (skip) => {
-        this.props.getCars({skip});
+        this.props.getMovies({skip});
     } 
 
     render() {
         const {
-            cars,
+            movies,
             limit,
             total,
             tableProps,
@@ -47,7 +46,7 @@ class App extends PureComponent {
                         color="primary"
                         size="lg"
                         tag={Link} 
-                        to="/cars/edit/new"> Nuevo </Button>
+                        to="/movies/edit/new"> Nuevo </Button>
                     </Col>
                 </Row>
                 <hr/>
@@ -58,13 +57,13 @@ class App extends PureComponent {
                         )}
                         {!loading && (
                             <Table {...{
-                                data: cars,
+                                data: movies,
                                 ...tableProps,
                                 onSort,
                                 limit,
                                 total,
                                 onPageClick: this.handlePagination,
-                                linkTo:'cars'
+                                linkTo:'movies'
                             }}/>
                         )}
                     </Col>
@@ -75,10 +74,10 @@ class App extends PureComponent {
 }
 
 const mapStateToProps = (state /* nuestro Store */, ownProps /*  */ ) => {
-    const {documents: {cars, limit, total, loading}, tableProps} = state.car;
+    const {documents: {movies, limit, total, loading}, tableProps} = state.movie;
     return {
         tableProps,
-        cars,
+        movies,
         limit,
         total,
         loading
@@ -86,10 +85,9 @@ const mapStateToProps = (state /* nuestro Store */, ownProps /*  */ ) => {
 }
 
 const mapDispatchToProps = (dispatch /* acciones a disparar */, ownProps /*  */ ) => ({
-    getCars: filters => dispatch(fetchCarsRequested(filters)),
-    onSort: sort => dispatch(sortCar(sort)),
-    submitCarData: () => dispatch(submitCarDataRequested()),
-    deleteCar: id => dispatch(deleteCarRequested(id))
+    getMovies: filters => dispatch(fetchMoviesRequested(filters)),
+    onSort: sort => dispatch(sortMovie(sort)),
+    submitMovieData: () => dispatch(submitMovieDataRequested())
 })
 
 export default connect(

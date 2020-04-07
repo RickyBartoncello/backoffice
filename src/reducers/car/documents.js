@@ -4,7 +4,8 @@ import {
     SORT_CAR,
     SUBMIT_CAR_DATA_SUCCEEDED,
     FETCH_CAR_SUCCEEDED,
-    UPDATE_CAR_DATA
+    UPDATE_CAR_DATA,
+    DELETE_CAR_SUCCEEDED
 } from '../../actions/car';
 
 import orderBy from 'lodash/orderBy'
@@ -37,6 +38,8 @@ export default (state = initialState, action) => {
             return { ...state, car: action.car }
         case UPDATE_CAR_DATA:
             return { ...state, car: action.car };
+        case DELETE_CAR_SUCCEEDED:
+            return { ...state, car: action.car, loading: false };
         default:
             return state;
     }

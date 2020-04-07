@@ -5,10 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import {
-    submitCarDataRequested,
-    fetchCarRequested,
-    updateCarData
-} from '../../actions/car'
+    submitMovieDataRequested,
+    fetchMovieRequested,
+    updateMovieData
+} from '../../actions/movie'
 
 import {
     Container,
@@ -23,30 +23,30 @@ import {
 
 
 
-const Car = (props) => {
+const Movie = (props) => {
     console.log(props);
     const dispatch = useDispatch();
     const { id } = useParams();
-    const { car } = useSelector(state => state.car.documents);
-    console.log(car)
-    const [title, setTitle] = useState('Nuevo carro');
+    const { movie } = useSelector(state => state.movie.documents);
+    console.log(movie)
+    const [title, setTitle] = useState('Nueva Pelicula');
     const submit = () => {
-        dispatch(submitCarDataRequested())
+        dispatch(submitMovieDataRequested())
     }
-    console.log(id, car);
+    console.log(id, movie);
     useEffect(
         () => {
             if (id && id.includes('-') && (id.match(/-/g) || []).length === 4) {
-                dispatch(fetchCarRequested(id));
-                setTitle('Edición del carro')
+                dispatch(fetchMovieRequested(id));
+                setTitle('Edición del moviero')
             }
         }, [dispatch, id]);
 
 
 
     const handleChange = (value, path) => {
-        set(car, path, value);
-        dispatch(updateCarData(car)
+        set(movie, path, value);
+        dispatch(updateMovieData(movie)
         )
     }
 
@@ -59,27 +59,27 @@ const Car = (props) => {
                 <Row form>
                     <Col md={2}>
                         <FormGroup>
-                            <Label for="exampleBrand">Marca</Label>
+                            <Label for="exampleTitle">Titulo</Label>
                             <Input
                                 type="text"
-                                name="brand"
-                                id="exampleBrand"
-                                placeholder="ingrese la marca"
-                                onChange={({ target: { value } }) => handleChange(value, 'brand')}
-                                value={car.brand}
+                                name="title"
+                                id="exampleTitle"
+                                placeholder="Ingrese el Titulo de la Pelicula"
+                                onChange={({ target: { value } }) => handleChange(value, 'title')}
+                                value={movie.title}
                             />
                         </FormGroup>
                     </Col>
                     <Col md={2}>
                         <FormGroup>
-                            <Label for="exampleModel">Modelo</Label>
+                            <Label for="exampleGenres">Genero</Label>
                             <Input
                                 type="text"
-                                name="model"
-                                id="exampleModel"
-                                placeholder="ingrese el modelo"
-                                onChange={({ target: { value } }) => handleChange(value, 'model')}
-                                value={car.model}
+                                name="genres"
+                                id="exampleGenres"
+                                placeholder="Ingrese el Genero de la Pelicula"
+                                onChange={({ target: { value } }) => handleChange(value, 'genres')}
+                                value={movie.genres}
                             />
                         </FormGroup>
                     </Col>
@@ -92,9 +92,9 @@ const Car = (props) => {
                                 type="text"
                                 name="year"
                                 id="exampleYear"
-                                placeholder="ingrese el año del carro"
+                                placeholder="Ingrese el año de la Pelicula" 
                                 onChange={({ target: { value } }) => handleChange(value, 'year')}
-                                value={car.year}
+                                value={movie.year}
                             />
                         </FormGroup>
                     </Col>
@@ -104,7 +104,7 @@ const Car = (props) => {
                         <Button onClick={() => submit()}
                             tag={Link} color="primary"
                             className="badge-pill"
-                            to={`/cars/`}
+                            to={`/movies/`}
                         > Guardar </Button>
                     </Col>
                 </Row>
@@ -113,4 +113,4 @@ const Car = (props) => {
     )
 };
 
-export default Car;
+export default Movie;

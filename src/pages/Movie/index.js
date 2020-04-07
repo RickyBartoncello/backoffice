@@ -1,8 +1,8 @@
 import React from 'react';
 import {Switch,Route} from 'react-router-dom';
 
-import List from './List';
-import Edit from './Edit';
+import List from './list';
+import Edit from './edit';
 
 const Movie = ({match: {path}}) => (
     <Switch>
