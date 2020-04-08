@@ -10,18 +10,19 @@ import {
     Col,
     Pagination,
     PaginationItem,
-    PaginationLink
+    PaginationLink,
+    ButtonGroup
 } from 'reactstrap';
 
 import times from 'lodash/times';
 import ceil from 'lodash/ceil';
 import toNumber from 'lodash/toNumber';
 
-export default ({ data, columns, headers, onSort, limit, total, onPageClick, currentPage, linkTo }) => (
+export default ({ data, columns, headers, onSort, limit, total, onPageClick, onDelete, currentPage, linkTo }) => (
     <Container fluid>
         <Row>
             <Col>
-                <Table bordered size="sm" hovered dark className="table table-striped table-bordered text-center">
+                <Table bordered size="sm" hovered dark className="table text-center table-striped table-bordered">
                     <thead>
                         <tr>
                             {map(headers, header => (
@@ -38,10 +39,13 @@ export default ({ data, columns, headers, onSort, limit, total, onPageClick, cur
                             <tr key={d.id} className={d.deleted ? "bg-danger" : ""}>
                                 {map(columns, column => {
                                     if (column === 'actions') {
-                                        return (<td >
-                                            <Button tag={Link} color="primary" className="badge-pill" to={`${linkTo}/edit/${d.id}`}> Edición  </Button>
-                                            <Button tag={Link} className="badge-pill badge-danger" to={`${linkTo}/delete/${d.id}`}> Eliminar </Button>  
-                                        </td>);
+                                        return (
+                                            <td>
+                                                <ButtonGroup>
+                                                    <Button tag={Link} color="primary" to={`/${linkTo}/edit/${d.id}`}> Edición </Button>
+                                                    <Button color="danger" onClick={() => onDelete(d)}> Eliminar </Button>
+                                                </ButtonGroup>
+                                            </td>);
                                     }
                                     return (<td>{get(d, column)}</td>);
                                 })}
@@ -80,4 +84,5 @@ export default ({ data, columns, headers, onSort, limit, total, onPageClick, cur
             </Col>
         </Row>
     </Container>
+
 )

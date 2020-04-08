@@ -1,19 +1,15 @@
-import set from 'lodash/set';
-
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
+import React, {PureComponent} from 'react';
+import {connect} from 'react-redux';
 import {
-    submitCarDataRequested,
-    fetchCarRequested,
-    updateCarData
+    fetchCarRequested, // fetch One, para edicion <<<
+    submitCarDataRequested, // Sagas / Api Action <<< 
+    updateCarData // Only Reducers <<< 
 } from '../../actions/car'
 
 import {
-    Container,
     Row,
     Col,
+    Container,
     Button,
     Form,
     FormGroup,
@@ -21,95 +17,127 @@ import {
     Input
 } from 'reactstrap';
 
+import map from 'lodash/map';
+import get from 'lodash/get';
+import set from 'lodash/set';
 
-
-const Car = (props) => {
-    console.log(props);
-    const dispatch = useDispatch();
-    const { id } = useParams();
-    const { car } = useSelector(state => state.car.documents);
-    console.log(car)
-    const [title, setTitle] = useState('Nuevo carro');
-    const submit = () => {
-        dispatch(submitCarDataRequested())
+const fieldsData = [
+    {
+        control: 'brand',
+        label: 'Nombre',
+        path: 'brand',
+        value: null,
+        type: 'text'
+    },
+    {
+        control: 'model',
+        label: 'Modelo',
+        path: 'model',
+        value: null,
+        type: 'text'
+    },
+    {
+        control: 'year',
+        label: 'Año',
+        path: 'year',
+        value: null,
+        type: 'number'
     }
-    console.log(id, car);
-    useEffect(
-        () => {
-            if (id && id.includes('-') && (id.match(/-/g) || []).length === 4) {
-                dispatch(fetchCarRequested(id));
-                setTitle('Edición del carro')
-            }
-        }, [dispatch, id]);
+];
 
-
-
-    const handleChange = (value, path) => {
-        set(car, path, value);
-        dispatch(updateCarData(car)
-        )
+class Edit extends PureComponent {
+    /*componentDidMount() se invoca inmediatamente después de que un componente se monte.*/
+    componentDidMount() {
+        if (this.props.match.params.id) {
+            this.props.getCar();
+        }
     }
 
+    handleSubmit(event) {//es una funcio reservada?//handle se usa en funciones referidas a eventos?
 
+        event.preventDefault();//en React no puedes retornar false 
+                            //para prevenir el comportamiento por defecto. 
+                            //Debes, explícitamente, llamar preventDefault.
+        this.props.submitCar()
+    }
 
-    return (
-        <Container fluid>
-            <Form onSubmit={() => submit()}>
-                <h3 sm={5}>{title}</h3>
-                <Row form>
-                    <Col md={2}>
-                        <FormGroup>
-                            <Label for="exampleBrand">Marca</Label>
-                            <Input
-                                type="text"
-                                name="brand"
-                                id="exampleBrand"
-                                placeholder="ingrese la marca"
-                                onChange={({ target: { value } }) => handleChange(value, 'brand')}
-                                value={car.brand}
-                            />
-                        </FormGroup>
-                    </Col>
-                    <Col md={2}>
-                        <FormGroup>
-                            <Label for="exampleModel">Modelo</Label>
-                            <Input
-                                type="text"
-                                name="model"
-                                id="exampleModel"
-                                placeholder="ingrese el modelo"
-                                onChange={({ target: { value } }) => handleChange(value, 'model')}
-                                value={car.model}
-                            />
-                        </FormGroup>
-                    </Col>
-                </Row>
-                <Row form>
-                    <Col md={4}>
-                        <FormGroup>
-                            <Label for="exampleYear">Año</Label>
-                            <Input
-                                type="text"
-                                name="year"
-                                id="exampleYear"
-                                placeholder="ingrese el año del carro"
-                                onChange={({ target: { value } }) => handleChange(value, 'year')}
-                                value={car.year}
-                            />
-                        </FormGroup>
-                    </Col>
-                </Row>
-                <Row form>
+    //render() Un componente con una render prop toma una función
+    //que devuelve un elemento de React y lo
+    //llama en lugar de implementar su propia
+    //lógica de representación.
+    render() {
+        const {fields} = this.props;
+        return (
+            <Container>
+                <Row>
                     <Col>
-                        <Button onClick={() => submit()}
-                            color="primary"
-                            className="badge-pill"
-                        > Guardar </Button>
+                        <Form onSubmit={e => this.handleSubmit(e)}>
+                            {map(fields, field => (
+                                <FormGroup>
+                                    <Label>
+                                        {field.label}
+                                        <br/>
+                                        <Input
+                                            key={field.control}
+                                            name={field.control}
+                                            {...field}
+                                        >
+                                        </Input>
+                                    </Label>
+                                </FormGroup>
+                            ))}
+                            <Button>
+                                Submit
+                            </Button>
+                        </Form>
                     </Col>
                 </Row>
-            </Form>
-        </Container>
-    )
-};
+            </Container>
+        )
+    };
+}
 
-export default Car;
+const mapStateToProps = state => {
+    const {car, loading} = state.car.documents;
+    const fields = map(fieldsData, field => ({
+        ...field,
+        value: get(state.car.documents.car, field.path, '')
+    }));
+    return {
+        fields,
+        car,
+        loading
+    }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    const {id} = ownProps.match.params;
+    return {
+        getCar: () => dispatch(fetchCarRequested(id)),
+        updateCar: car => dispatch(updateCarData(car)),
+        submitCar: () => dispatch(submitCarDataRequested())
+    }
+}
+
+const mergeProps = (stateProps, dispatchProps, ownProps) => {
+
+    const megedFields = map(stateProps.fields, field => ({
+        ...field,
+        onChange: ({target: {value}}) => dispatchProps.updateCar(set(
+            stateProps.car, field.path, value
+        ))
+    }));
+
+    return {
+        ...stateProps,
+        ...dispatchProps,
+        ...ownProps,
+        fields: megedFields
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+    mergeProps
+)(Edit);

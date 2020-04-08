@@ -26,7 +26,6 @@ class App extends PureComponent {
     render() {
         const {
             countries,
-            country,
             limit,
             total,
             tableProps,
