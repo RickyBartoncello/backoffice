@@ -7,16 +7,27 @@ import {
     Button,
     Row,
     Col,
-    Spinner
+    Spinner,
+    ButtonGroup,
+    Modal,
+    ModalFooter,
+    ModalHeader,
+    ModalBody
 } from 'reactstrap';
 
 import {
     fetchInstrumentsRequested,
     sortInstrument,
-    submitInstrumentDataRequested
+    deleteInstrumentRequested
 } from '../../actions/instrument'
 
 class App extends PureComponent {
+    constructor(props) {
+        super(props);
+        this.state = {
+            modal: null
+        };
+    }
     componentDidMount() {
         this.props.getInstruments();
     }
@@ -34,6 +45,8 @@ class App extends PureComponent {
             onSort,
             loading
         } = this.props;
+
+        const {modal} = this.state;
         return (
             <Container>
                 <Row>
@@ -63,11 +76,35 @@ class App extends PureComponent {
                                 limit,
                                 total,
                                 onPageClick: this.handlePagination,
+                                onDelete: modal => this.setState({modal}),
                                 linkTo:'instruments'
                             }}/>
                         )}
                     </Col>
                 </Row>
+                {modal && (
+                    <Modal isOpen>
+                        <ModalHeader>
+                            Te vo a borrar
+                        </ModalHeader>
+                        <ModalBody>
+                            Confirme Accion {modal.family}  {modal.instrument}
+                        </ModalBody>
+                        <ModalFooter>
+                            <ButtonGroup>
+                                <Button color="warning" onClick={() => {
+                                    this.props.deleteInstrument(modal.id)
+                                    this.setState({modal: null})
+                                }} >
+                                    Aceptar
+                                </Button>
+                                <Button color="info" onClick={() => this.setState({modal: null})}>
+                                    Cancelar
+                                </Button>
+                            </ButtonGroup>
+                        </ModalFooter>
+                    </Modal>
+                )}
             </Container>
         )
     }
@@ -87,7 +124,7 @@ const mapStateToProps = (state /* nuestro Store */, ownProps /*  */ ) => {
 const mapDispatchToProps = (dispatch /* acciones a disparar */, ownProps /*  */ ) => ({
     getInstruments: filters => dispatch(fetchInstrumentsRequested(filters)),
     onSort: sort => dispatch(sortInstrument(sort)),
-    submitInstrumentData: () => dispatch(submitInstrumentDataRequested())
+    deleteInstrument: id => dispatch(deleteInstrumentRequested(id))
 })
 
 export default connect(

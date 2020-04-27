@@ -41,7 +41,7 @@ export default ({ data, columns, headers, onSort, limit, total, onPageClick, onD
                                     if (column === 'actions') {
                                         return (
                                             <td>
-                                                <ButtonGroup>
+                                                <ButtonGroup className="badge badge-pill">
                                                     <Button tag={Link} color="primary" to={`/${linkTo}/edit/${d.id}`}> Edición </Button>
                                                     <Button color="danger" onClick={() => onDelete(d)}> Eliminar </Button>
                                                 </ButtonGroup>

@@ -31,3 +31,10 @@ export const fetchCountrySucceeded = country => ({
     type: FETCH_COUNTRY_SUCCEEDED,
     country
 }) // Disparador o Action Creator
+
+export const DELETE_COUNTRY_REQUESTED = 'DELETE_COUNTRY_REQUESTED';
+export const DELETE_COUNTRY_SUCCEEDED = 'DELETE_COUNTRY_SUCCEEDED';
+
+export const deleteCountryRequested = id => ({type: DELETE_COUNTRY_REQUESTED, id});
+export const deleteCountrySucceeded = constant({type: DELETE_COUNTRY_SUCCEEDED});
+

@@ -20,22 +20,13 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
-    switch(action.type) {
+    switch (action.type) {
         case FETCH_CARS_REQUESTED:
-            return {...state, loading: true};
+            return { ...state, loading: true };
         case FETCH_CARS_SUCCEEDED:
-            const {cars, limit, total} = action;
-            return {...state, loading: false, cars, limit, total};
+            const { cars, limit, total } = action;
+            return { ...state, loading: false, cars, limit, total };
         case SORT_CAR:
-            /*action = {
-                    sort: {
-                        id: 'foo',
-                        sort: 'asc' 
-                    }
-                }
-            }
-            const {sort: {id, sort}} = action
-                    */
             return {
                 ...state,
                 loading: false,
@@ -45,18 +36,18 @@ export default (state = initialState, action) => {
                 )
             };
         case SUBMIT_CAR_DATA_REQUESTED:
-            return{
+            return {
                 ...state,
                 loading: true
             };
         case SUBMIT_CAR_DATA_SUCCEEDED:
-            return{
+            return {
                 ...state,
                 loading: false
             };
         case UPDATE_CAR_DATA:
-            return {...state, car: action.car};
-        case FETCH_CAR_SUCCEEDED: 
+            return { ...state, car: action.car };
+        case FETCH_CAR_SUCCEEDED:
             return {
                 ...state,
                 loading: false,
@@ -68,17 +59,17 @@ export default (state = initialState, action) => {
                 loading: true,
                 car: {}
             };
-            case DELETE_CAR_REQUESTED:
-                return {
-                    ...state,
-                    loading: true,
-                };   
+        case DELETE_CAR_REQUESTED:
+            return {
+                ...state,
+                loading: true,
+            };
         case DELETE_CAR_SUCCEEDED:
-        return {
-             ...state,
-            loading: false,
-            car: action.car
-        };
+            return {
+                ...state,
+                loading: false,
+                car: action.car
+            };
         default:
             return state;
     }

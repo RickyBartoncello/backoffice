@@ -7,23 +7,34 @@ import {
     Button,
     Row,
     Col,
-    Spinner
+    Spinner,
+    ButtonGroup,
+    Modal,
+    ModalFooter,
+    ModalHeader,
+    ModalBody
 } from 'reactstrap';
 
 import {
     fetchMoviesRequested,
     sortMovie,
-    submitMovieDataRequested
+    deleteMovieRequested
 } from '../../actions/movie'
 
 class App extends PureComponent {
+    constructor(props) {
+        super(props);
+        this.state = {
+            modal: null
+        };
+    }
     componentDidMount() {
         this.props.getMovies();
     }
 
     handlePagination = (skip) => {
-        this.props.getMovies({skip});
-    } 
+        this.props.getMovies({ skip });
+    }
 
     render() {
         const {
@@ -34,6 +45,8 @@ class App extends PureComponent {
             onSort,
             loading
         } = this.props;
+
+        const {modal} = this.state;
         return (
             <Container>
                 <Row>
@@ -41,15 +54,15 @@ class App extends PureComponent {
                         <h3>Tabla de datos </h3>
                     </Col>
                     <Col sm="3">
-                        <Button  
-                        className="float-right"
-                        color="primary"
-                        size="lg"
-                        tag={Link} 
-                        to="/movies/edit/new"> Nuevo </Button>
+                        <Button
+                            className="float-right"
+                            color="primary"
+                            size="lg"
+                            tag={Link}
+                            to="/movies/edit/new"> Nuevo </Button>
                     </Col>
                 </Row>
-                <hr/>
+                <hr />
                 <Row>
                     <Col>
                         {loading && (
@@ -63,18 +76,42 @@ class App extends PureComponent {
                                 limit,
                                 total,
                                 onPageClick: this.handlePagination,
-                                linkTo:'movies'
-                            }}/>
+                                onDelete: modal => this.setState({ modal }),
+                                linkTo: 'movies'
+                            }} />
                         )}
                     </Col>
                 </Row>
+                {modal && (
+                    <Modal isOpen>
+                        <ModalHeader>
+                            Te vo a borrar
+                        </ModalHeader>
+                        <ModalBody>
+                            Confirme Accion {modal.title}  {modal.genres} {modal.year}
+                        </ModalBody>
+                        <ModalFooter>
+                            <ButtonGroup>
+                                <Button color="warning" onClick={() => {
+                                    this.props.deleteMovie(modal.id)
+                                    this.setState({ modal: null })
+                                }} >
+                                    Aceptar
+                                </Button>
+                                <Button color="info" onClick={() => this.setState({ modal: null })}>
+                                    Cancelar
+                                </Button>
+                            </ButtonGroup>
+                        </ModalFooter>
+                    </Modal>
+                )}
             </Container>
         )
     }
 }
 
-const mapStateToProps = (state /* nuestro Store */, ownProps /*  */ ) => {
-    const {documents: {movies, limit, total, loading}, tableProps} = state.movie;
+const mapStateToProps = (state /* nuestro Store */, ownProps /*  */) => {
+    const { documents: { movies, limit, total, loading }, tableProps } = state.movie;
     return {
         tableProps,
         movies,
@@ -84,10 +121,11 @@ const mapStateToProps = (state /* nuestro Store */, ownProps /*  */ ) => {
     };
 }
 
-const mapDispatchToProps = (dispatch /* acciones a disparar */, ownProps /*  */ ) => ({
+const mapDispatchToProps = (dispatch /* acciones a disparar */, ownProps /*  */) => ({
     getMovies: filters => dispatch(fetchMoviesRequested(filters)),
     onSort: sort => dispatch(sortMovie(sort)),
-    submitMovieData: () => dispatch(submitMovieDataRequested())
+    deleteMovie: id => dispatch(deleteMovieRequested(id))
+    
 })
 
 export default connect(

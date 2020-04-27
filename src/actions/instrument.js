@@ -33,3 +33,8 @@ export const fetchInstrumentSucceeded = instrument => ({
     instrument
 }) // Disparador o Action Creator
 
+export const DELETE_INSTRUMENT_REQUESTED = 'DELETE_INSTRUMENT_REQUESTED';
+export const DELETE_INSTRUMENT_SUCCEEDED = 'DELETE_INSTRUMENT_SUCCEEDED';
+
+export const deleteInstrumentRequested = id => ({type: DELETE_INSTRUMENT_REQUESTED, id});
+export const deleteInstrumentSucceeded = constant({type: DELETE_INSTRUMENT_SUCCEEDED});

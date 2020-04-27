@@ -32,3 +32,9 @@ export const fetchMovieSucceeded = movie => ({
     type: FETCH_MOVIE_SUCCEEDED,
     movie
 }) // Disparador o Action Creator
+
+export const DELETE_MOVIE_REQUESTED = 'DELETE_MOVIE_REQUESTED';
+export const DELETE_MOVIE_SUCCEEDED = 'DELETE_MOVIE_SUCCEEDED';
+
+export const deleteMovieRequested = id => ({type: DELETE_MOVIE_REQUESTED, id});
+export const deleteMovieSucceeded = constant({type: DELETE_MOVIE_SUCCEEDED});

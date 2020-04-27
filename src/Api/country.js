@@ -19,6 +19,10 @@ class Country {
         }
         return Http.put(`${API}/${country.id}`, { ...country });
     }
+    
+    static delete(id) {
+        return Http.delete(`${API}/${id}`);
+    }
 }
 
 export default Country;

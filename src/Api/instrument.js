@@ -19,6 +19,10 @@ class Instrument {
         }
         return Http.put(`${API}/${instrument.id}`, { ...instrument });
     }
+
+    static delete(id) {
+        return Http.delete(`${API}/${id}`);
+    }
 }
 
 export default Instrument;

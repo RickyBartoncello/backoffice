@@ -1,7 +1,7 @@
 import { call, put, delay, select } from 'redux-saga/effects';
 
 import MovieAPI from '../Api/movie';
-import {fetchMoviesSucceeded, submitMovieDataSucceeded, fetchMovieSucceeded} from '../actions/movie';
+import {fetchMoviesSucceeded, submitMovieDataSucceeded, fetchMovieSucceeded, deleteMovieSucceeded} from '../actions/movie';
 
 export function* fetchMovies({ filter }) {
     try {
@@ -15,19 +15,51 @@ export function* fetchMovies({ filter }) {
     }
 }
 
-export function* fetchMovie({id}) {
-    const movie = yield call(MovieAPI.fetchMovie, id);
-    yield put(
-        fetchMovieSucceeded(movie)
-    );
+export function* getMovie({id}) {
+    try {
+        const {movie} = yield call(
+            MovieAPI.getOne,
+            id
+        );
+        yield delay(500);
+        yield put(
+            fetchMovieSucceeded(movie)
+        );
+    } catch (err) {
+        alert(JSON.stringify(err));
+    }
 }
 
-export function* submitMovieData() {
-    const movie = yield select(state => state.movie.documents.movie);
-    const result = yield call(MovieAPI.submitMovie, movie);
-    if (result.success) {
-        yield put(
-            submitMovieDataSucceeded()
+export function* saveMovie() {
+    try {
+        const {movie} = yield select(state => state.movie.documents)
+        const status = yield call(
+            MovieAPI.save,
+            movie // Si tiene id es un put, Si no tiene caso nuevo es post
         );
+        yield delay(500);
+        yield put(
+            submitMovieDataSucceeded(status)
+        );
+    } catch (err) {
+        alert(JSON.stringify(err));
+    }
+}
+export function* deleteMovie({id}) {
+    try {
+        const status = yield call(
+            MovieAPI.delete,
+            id
+        );
+        /**
+         * @todo
+         * check why this is failing. filter should be inside reducers so we can re take it on a call
+         */
+        yield delay(500);
+        yield put(
+            deleteMovieSucceeded(status)
+        );
+    } catch (err) {
+        alert(JSON.stringify(err));
     }
 }

@@ -1,27 +1,39 @@
-import React, {PureComponent} from 'react';
+import React, { PureComponent } from 'react';
 import Table from '../../components/table';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import {
     Container,
+    Button,
     Row,
     Col,
-    Spinner
+    Spinner,
+    ButtonGroup,
+    Modal,
+    ModalFooter,
+    ModalHeader,
+    ModalBody
 } from 'reactstrap';
 
 import {
     fetchCountriesRequested,
     sortCountry,
-    submitCountryDataRequested
+    deleteCountryRequested
 } from '../../actions/country'
 
 class App extends PureComponent {
+    constructor(props) {
+        super(props);
+        this.state = {
+            modal: null
+        };
+    }
     componentDidMount() {
         this.props.getCountries();
     }
 
     handlePagination = (skip) => {
-        this.props.getCountries({skip});
-    } 
+        this.props.getCountries({ skip });
+    }
 
     render() {
         const {
@@ -32,6 +44,8 @@ class App extends PureComponent {
             onSort,
             loading
         } = this.props;
+
+        const { modal } = this.state;
         return (
             <Container>
                 <Row>
@@ -39,7 +53,7 @@ class App extends PureComponent {
                         <h3>Tabla de datos </h3>
                     </Col>
                 </Row>
-                <hr/>
+                <hr />
                 <Row>
                     <Col>
                         {loading && (
@@ -53,18 +67,42 @@ class App extends PureComponent {
                                 limit,
                                 total,
                                 onPageClick: this.handlePagination,
-                                linkTo:'country'
-                            }}/>
+                                onDelete: modal => this.setState({ modal }),
+                                linkTo: 'country'
+                            }} />
                         )}
                     </Col>
                 </Row>
+                {modal && (
+                    <Modal isOpen>
+                        <ModalHeader>
+                            Te vo a borrar
+                        </ModalHeader>
+                        <ModalBody>
+                            Confirme Accion {modal.name}  {modal.code} {modal.createdAt}
+                        </ModalBody>
+                        <ModalFooter>
+                            <ButtonGroup>
+                                <Button color="warning" onClick={() => {
+                                    this.props.deleteCountry(modal.id)
+                                    this.setState({ modal: null })
+                                }} >
+                                    Aceptar
+                                </Button>
+                                <Button color="info" onClick={() => this.setState({ modal: null })}>
+                                    Cancelar
+                                </Button>
+                            </ButtonGroup>
+                        </ModalFooter>
+                    </Modal>
+                )}
             </Container>
         )
     }
 }
 
-const mapStateToProps = (state /* nuestro Store */, ownProps /*  */ ) => {
-    const {documents: {countries, limit, total, loading}, tableProps} = state.country;
+const mapStateToProps = (state /* nuestro Store */, ownProps /*  */) => {
+    const { documents: { countries, limit, total, loading }, tableProps } = state.country;
     return {
         tableProps,
         countries,
@@ -74,10 +112,10 @@ const mapStateToProps = (state /* nuestro Store */, ownProps /*  */ ) => {
     };
 }
 
-const mapDispatchToProps = (dispatch /* acciones a disparar */, ownProps /*  */ ) => ({
+const mapDispatchToProps = (dispatch /* acciones a disparar */, ownProps /*  */) => ({
     getCountries: filters => dispatch(fetchCountriesRequested(filters)),
     onSort: sort => dispatch(sortCountry(sort)),
-    submitCountryData: () => dispatch(submitCountryDataRequested())
+    deleteCountry: id => dispatch(deleteCountryRequested(id))
 })
 
 export default connect(
