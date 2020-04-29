@@ -1,37 +1,31 @@
-import constant from 'lodash/constant';
+import {constant} from 'lodash';
 
 export const FETCH_CARS_REQUESTED = 'FETCH_CARS_REQUESTED'; // Accion | Action
 export const FETCH_CARS_SUCCEEDED = 'FETCH_CARS_SUCCEEDED'; // Accion | Action
-
 export const SORT_CAR = 'SORT_CAR';
 
 export const fetchCarsRequested = filter => ({type: FETCH_CARS_REQUESTED, filter}) // Disparador o Action Creator
-export const fetchCarsSucceeded = (cars, limit, total ) => ({
+export const fetchCarsSucceeded = (cars, limit, total) => ({
     type: FETCH_CARS_SUCCEEDED,
     cars, limit, total
 }) // Disparador o Action Creator
-
 export const sortCar = sort => ({type: SORT_CAR, sort});
-
-export const SUBMIT_CAR_DATA_REQUESTED = 'SUBMIT_CAR_DATA_REQUESTED';
-export const SUBMIT_CAR_DATA_SUCCEEDED = 'SUBMIT_CAR_DATA_SUCCEEDED';
-
-export const submitCarDataRequested = constant({type: SUBMIT_CAR_DATA_REQUESTED});
-export const submitCarDataSucceeded = constant({type: SUBMIT_CAR_DATA_SUCCEEDED});
-
-export const UPDATE_CAR_DATA = 'UPDATE_CAR_DATA';
-
-<<<<<<< HEAD
-export const updateCarData = cart => ({type: UPDATE_CAR_DATA, cart});
 
 export const FETCH_CAR_REQUESTED = 'FETCH_CAR_REQUESTED'; // Accion | Action
 export const FETCH_CAR_SUCCEEDED = 'FETCH_CAR_SUCCEEDED'; // Accion | Action
+export const SUBMIT_CAR_DATA_REQUESTED = 'SUBMIT_CAR_DATA_REQUESTED';
+export const SUBMIT_CAR_DATA_SUCCEEDED = 'SUBMIT_CAR_DATA_SUCCEEDED';
+export const UPDATE_CAR_DATA = 'UPDATE_CAR_DATA'; 
+export const DELETE_CAR_REQUESTED = 'DELETE_CAR_REQUESTED';
+export const DELETE_CAR_SUCCEEDED = 'DELETE_CAR_SUCCEEDED';
 
 export const fetchCarRequested = id => ({type: FETCH_CAR_REQUESTED, id}) // Disparador o Action Creator
 export const fetchCarSucceeded = car => ({
     type: FETCH_CAR_SUCCEEDED,
     car
 }) // Disparador o Action Creator
-=======
-export const updateCarData = cart => ({type: UPDATE_CAR_DATA, cart});
->>>>>>> 01dc7665da9634571f1432fcf697ecf4fa836648
+export const updateCarData = car => ({type: UPDATE_CAR_DATA, car}); // Trigger
+export const submitCarDataRequested = props => ({type: SUBMIT_CAR_DATA_REQUESTED, props});
+export const submitCarDataSucceeded = constant({type: SUBMIT_CAR_DATA_SUCCEEDED});
+export const deleteCarRequested = id => ({type: DELETE_CAR_REQUESTED, id});
+export const deleteCarSucceeded = constant({type: DELETE_CAR_SUCCEEDED});

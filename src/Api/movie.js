@@ -1,28 +1,28 @@
 import Http from '.';
 
-const API = 'api/countries';
+const API = 'api/movies';
 
-class Country {
+class Movie {
     static fetch(filters) {
         const filterObj = new URLSearchParams(filters).toString();
         return Http.get(`${API}?${filterObj}`);
     }
 
-    static fetchCountry(id) {
+    static fetchMovie(id) {
         return Http.get(`${API}/${id}`);
     }
 
-    static submitCountry(country) {
-        console.log(country);
-        if (!country.id) {
-            return Http.post(API, { ...country });
+    static submitMovie(movie) {
+        console.log(movie);
+        if (!movie.id) {
+            return Http.post(API, { ...movie });
         }
-        return Http.put(`${API}/${country.id}`, { ...country });
+        return Http.put(`${API}/${movie.id}`, { ...movie });
     }
-    
+
     static delete(id) {
         return Http.delete(`${API}/${id}`);
     }
 }
 
-export default Country;
+export default Movie;

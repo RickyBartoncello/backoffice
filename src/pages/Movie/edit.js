@@ -2,12 +2,13 @@ import set from 'lodash/set';
 
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import {
-    submitCountryDataRequested,
-    fetchCountryRequested,
-    updateCountryData
-} from '../../actions/country'
+    submitMovieDataRequested,
+    fetchMovieRequested,
+    updateMovieData
+} from '../../actions/movie'
 
 import {
     Container,
@@ -22,30 +23,30 @@ import {
 
 
 
-const Country = (props) => {
+const Movie = (props) => {
     console.log(props);
     const dispatch = useDispatch();
     const { id } = useParams();
-    const { country } = useSelector(state => state.country.documents);
-    console.log(country)
-    const [title, setTitle] = useState('Nuevo Pais');
+    const { movie } = useSelector(state => state.movie.documents);
+    console.log(movie)
+    const [title, setTitle] = useState('Nueva Pelicula');
     const submit = () => {
-        dispatch(submitCountryDataRequested())
+        dispatch(submitMovieDataRequested())
     }
-    console.log(id, country);
+    console.log(id, movie);
     useEffect(
         () => {
             if (id && id.includes('-') && (id.match(/-/g) || []).length === 4) {
-                dispatch(fetchCountryRequested(id));
-                setTitle('Edición del Pais')
+                dispatch(fetchMovieRequested(id));
+                setTitle('Edición del moviero')
             }
         }, [dispatch, id]);
 
 
 
     const handleChange = (value, path) => {
-        set(country, path, value);
-        dispatch(updateCountryData(country)
+        set(movie, path, value);
+        dispatch(updateMovieData(movie)
         )
     }
 
@@ -58,27 +59,27 @@ const Country = (props) => {
                 <Row form>
                     <Col md={2}>
                         <FormGroup>
-                            <Label for="exampleCountry">Pais</Label>
+                            <Label for="exampleTitle">Titulo</Label>
                             <Input
                                 type="text"
-                                name="name"
-                                id="exampleCountry"
-                                placeholder="ingrese la Pais"
-                                onChange={({ target: { value } }) => handleChange(value, 'name')}
-                                value={country.name}
+                                name="title"
+                                id="exampleTitle"
+                                placeholder="Ingrese el Titulo de la Pelicula"
+                                onChange={({ target: { value } }) => handleChange(value, 'title')}
+                                value={movie.title}
                             />
                         </FormGroup>
                     </Col>
                     <Col md={2}>
                         <FormGroup>
-                            <Label for="exampleCode">Codigo</Label>
+                            <Label for="exampleGenres">Genero</Label>
                             <Input
                                 type="text"
-                                name="code"
-                                id="exampleCode"
-                                placeholder="ingrese el codeo"
-                                onChange={({ target: { value } }) => handleChange(value, 'code')}
-                                value={country.code}
+                                name="genres"
+                                id="exampleGenres"
+                                placeholder="Ingrese el Genero de la Pelicula"
+                                onChange={({ target: { value } }) => handleChange(value, 'genres')}
+                                value={movie.genres}
                             />
                         </FormGroup>
                     </Col>
@@ -86,14 +87,14 @@ const Country = (props) => {
                 <Row form>
                     <Col md={4}>
                         <FormGroup>
-                            <Label for="examplePoblation">Poblacion</Label>
+                            <Label for="exampleYear">Año</Label>
                             <Input
                                 type="text"
-                                name="createdAt"
-                                id="examplePoblation"
-                                placeholder="ingrese numero de poblacion"
-                                onChange={({ target: { value } }) => handleChange(value, 'createdAt')}
-                                value={country.createdAt}
+                                name="year"
+                                id="exampleYear"
+                                placeholder="Ingrese el año de la Pelicula" 
+                                onChange={({ target: { value } }) => handleChange(value, 'year')}
+                                value={movie.year}
                             />
                         </FormGroup>
                     </Col>
@@ -101,8 +102,9 @@ const Country = (props) => {
                 <Row form>
                     <Col>
                         <Button onClick={() => submit()}
-                            color="primary"
+                            tag={Link} color="primary"
                             className="badge-pill"
+                            to={`/movies/`}
                         > Guardar </Button>
                     </Col>
                 </Row>
@@ -111,4 +113,4 @@ const Country = (props) => {
     )
 };
 
-export default Country;
+export default Movie;

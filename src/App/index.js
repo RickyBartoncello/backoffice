@@ -6,11 +6,11 @@ import {
     Link
 } from "react-router-dom";
 
-import Cars from '../pages/Car/List/Component';
+import Cars from '../pages/Car';
 import Country from '../pages/Country';
 import Home from '../pages/Home';
 import Instruments from '../pages/Instrument';
-import Quote from '../pages/Quote';
+import Movie from '../pages/Movie';
 
 export default function BasicExample() {
     return (
@@ -19,16 +19,16 @@ export default function BasicExample() {
                 <nav className="bg-dark">
                     <figure>
                         &nbsp;&nbsp;&nbsp;
-                        <Link to="/"><img src='./logo192.png' width='50' height='50' alt="algo"/> </Link>
+                        <Link to="/"><img src='./logo192.png' width='50' height='50' alt="HOME" /> </Link>
                         <div className="text-center p-2">
-                        &nbsp;&nbsp;&nbsp;
-                            <Link to="/cars">Cars</Link>
                             &nbsp;&nbsp;&nbsp;
-                            <Link to="/country">Countries</Link>
+                            <Link to="/cars">Autos</Link>
                             &nbsp;&nbsp;&nbsp;
-                            <Link to="/instruments">Instruments</Link>
+                            <Link to="/instruments">Instrumentos</Link>
                             &nbsp;&nbsp;&nbsp;
-                            <Link to="/quotes">Quotes</Link>
+                            <Link to="/country">Paises</Link>
+                            &nbsp;&nbsp;&nbsp;
+                            <Link to="/movies">Peliculas</Link>
                         </div>
                     </figure>
                 </nav>
@@ -38,7 +38,7 @@ export default function BasicExample() {
                     <Route path="/cars" component={Cars} />
                     <Route path="/country" component={Country} />
                     <Route path="/instruments" component={Instruments} />
-                    <Route path="/quotes" component={Quote} />
+                    <Route path="/movies" component={Movie} />
                 </Switch>
             </>
         </Router>

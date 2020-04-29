@@ -4,7 +4,7 @@ import {Switch,Route} from 'react-router-dom';
 import List from './list';
 import Edit from './edit';
 
-const Country = ({match: {path}}) => (
+const Movie = ({match: {path}}) => (
     <Switch>
         <Route path={`${path}/edit/new`} component={Edit} exact/>
         <Route path={`${path}/edit/:id`} component={Edit}/>
@@ -13,4 +13,4 @@ const Country = ({match: {path}}) => (
 );
 
 
-export default Country;
+export default Movie;

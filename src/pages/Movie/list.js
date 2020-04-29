@@ -1,6 +1,7 @@
-import React, { PureComponent } from 'react';
+import React, {PureComponent} from 'react';
 import Table from '../../components/table';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import {
     Container,
     Button,
@@ -15,10 +16,10 @@ import {
 } from 'reactstrap';
 
 import {
-    fetchCountriesRequested,
-    sortCountry,
-    deleteCountryRequested
-} from '../../actions/country'
+    fetchMoviesRequested,
+    sortMovie,
+    deleteMovieRequested
+} from '../../actions/movie'
 
 class App extends PureComponent {
     constructor(props) {
@@ -28,16 +29,16 @@ class App extends PureComponent {
         };
     }
     componentDidMount() {
-        this.props.getCountries();
+        this.props.getMovies();
     }
 
     handlePagination = (skip) => {
-        this.props.getCountries({ skip });
+        this.props.getMovies({ skip });
     }
 
     render() {
         const {
-            countries,
+            movies,
             limit,
             total,
             tableProps,
@@ -45,12 +46,20 @@ class App extends PureComponent {
             loading
         } = this.props;
 
-        const { modal } = this.state;
+        const {modal} = this.state;
         return (
             <Container>
                 <Row>
                     <Col>
                         <h3>Tabla de datos </h3>
+                    </Col>
+                    <Col sm="3">
+                        <Button
+                            className="float-right"
+                            color="primary"
+                            size="lg"
+                            tag={Link}
+                            to="/movies/edit/new"> Nuevo </Button>
                     </Col>
                 </Row>
                 <hr />
@@ -61,14 +70,14 @@ class App extends PureComponent {
                         )}
                         {!loading && (
                             <Table {...{
-                                data: countries,
+                                data: movies,
                                 ...tableProps,
                                 onSort,
                                 limit,
                                 total,
                                 onPageClick: this.handlePagination,
                                 onDelete: modal => this.setState({ modal }),
-                                linkTo: 'country'
+                                linkTo: 'movies'
                             }} />
                         )}
                     </Col>
@@ -79,12 +88,12 @@ class App extends PureComponent {
                             Te vo a borrar
                         </ModalHeader>
                         <ModalBody>
-                            Confirme Accion {modal.name}  {modal.code} {modal.createdAt}
+                            Confirme Accion {modal.title}  {modal.genres} {modal.year}
                         </ModalBody>
                         <ModalFooter>
                             <ButtonGroup>
                                 <Button color="warning" onClick={() => {
-                                    this.props.deleteCountry(modal.id)
+                                    this.props.deleteMovie(modal.id)
                                     this.setState({ modal: null })
                                 }} >
                                     Aceptar
@@ -102,10 +111,10 @@ class App extends PureComponent {
 }
 
 const mapStateToProps = (state /* nuestro Store */, ownProps /*  */) => {
-    const { documents: { countries, limit, total, loading }, tableProps } = state.country;
+    const { documents: { movies, limit, total, loading }, tableProps } = state.movie;
     return {
         tableProps,
-        countries,
+        movies,
         limit,
         total,
         loading
@@ -113,9 +122,10 @@ const mapStateToProps = (state /* nuestro Store */, ownProps /*  */) => {
 }
 
 const mapDispatchToProps = (dispatch /* acciones a disparar */, ownProps /*  */) => ({
-    getCountries: filters => dispatch(fetchCountriesRequested(filters)),
-    onSort: sort => dispatch(sortCountry(sort)),
-    deleteCountry: id => dispatch(deleteCountryRequested(id))
+    getMovies: filters => dispatch(fetchMoviesRequested(filters)),
+    onSort: sort => dispatch(sortMovie(sort)),
+    deleteMovie: id => dispatch(deleteMovieRequested(id))
+    
 })
 
 export default connect(

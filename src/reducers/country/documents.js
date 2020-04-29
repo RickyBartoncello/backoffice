@@ -1,25 +1,29 @@
 import {
-    FETCH_COUNTRIES_SUCCEEDED,
     FETCH_COUNTRIES_REQUESTED,
+    FETCH_COUNTRIES_SUCCEEDED,
     SORT_COUNTRY,
-    EDIT_COUNTRY,
+    SUBMIT_COUNTRY_DATA_SUCCEEDED,
+    FETCH_COUNTRY_SUCCEEDED,
+    UPDATE_COUNTRY_DATA,
+    DELETE_COUNTRY_REQUESTED,
+    DELETE_COUNTRY_SUCCEEDED
 } from '../../actions/country';
 
 import orderBy from 'lodash/orderBy'
-//import edit from 'lodash/edit'
 
 const initialState = {
     loading: false,
-    countries: []
+    countries: [],
+    country: {}
 };
 
 export default (state = initialState, action) => {
-    switch(action.type) {
+    switch (action.type) {
         case FETCH_COUNTRIES_REQUESTED:
-            return {...state, loading: true};
+            return { ...state, loading: true };
         case FETCH_COUNTRIES_SUCCEEDED:
-            const {countries, limit, total} = action;
-            return {...state, loading: false, countries, limit, total};
+            const { countries, limit, total } = action;
+            return { ...state, loading: false, countries, limit, total };
         case SORT_COUNTRY:
             return {
                 ...state,
@@ -29,13 +33,23 @@ export default (state = initialState, action) => {
                     [action.sort.sort]
                 )
             };
-        /*case EDIT_COUNTRY:
-            return {...state, 
+        case SUBMIT_COUNTRY_DATA_SUCCEEDED:
+            return { ...state, success: true, country: {} };
+        case FETCH_COUNTRY_SUCCEEDED:
+            return { ...state, country: action.country };
+        case UPDATE_COUNTRY_DATA:
+            return { ...state, country: action.country };
+        case DELETE_COUNTRY_REQUESTED:
+            return {
+                ...state,
                 loading: true,
-                countries: edit(state.countries,
-                    [action.edit.id]
-                    )
-            };*/
+            };
+        case DELETE_COUNTRY_SUCCEEDED:
+            return {
+                ...state,
+                loading: false,
+                country: action.country
+            };
         default:
             return state;
     }

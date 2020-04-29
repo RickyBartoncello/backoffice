@@ -7,22 +7,34 @@ import {
     Button,
     Row,
     Col,
-    Spinner
+    Spinner,
+    ButtonGroup,
+    Modal,
+    ModalFooter,
+    ModalHeader,
+    ModalBody
 } from 'reactstrap';
 
 import {
     fetchInstrumentsRequested,
-    sortInstrument
+    sortInstrument,
+    deleteInstrumentRequested
 } from '../../actions/instrument'
 
 class App extends PureComponent {
+    constructor(props) {
+        super(props);
+        this.state = {
+            modal: null
+        };
+    }
     componentDidMount() {
         this.props.getInstruments();
     }
 
     handlePagination = (skip) => {
-        this.props.getInstruments({ skip });
-    }
+        this.props.getInstruments({skip});
+    } 
 
     render() {
         const {
@@ -33,17 +45,24 @@ class App extends PureComponent {
             onSort,
             loading
         } = this.props;
+
+        const {modal} = this.state;
         return (
             <Container>
                 <Row>
                     <Col>
-                        <h3> Tabla de datos</h3>
+                        <h3>Tabla de datos </h3>
                     </Col>
-                    <Col sm="0">
-                        <Button color="primary" tag={Link} to="/instruments/edit/new">Nuevo</Button>
+                    <Col sm="3">
+                        <Button  
+                        className="float-right"
+                        color="primary"
+                        size="lg"
+                        tag={Link} 
+                        to="/instruments/edit/new"> Nuevo </Button>
                     </Col>
                 </Row>
-                <hr />
+                <hr/>
                 <Row>
                     <Col>
                         {loading && (
@@ -57,18 +76,42 @@ class App extends PureComponent {
                                 limit,
                                 total,
                                 onPageClick: this.handlePagination,
-                                linkTo: "instruments"
-                            }} />
+                                onDelete: modal => this.setState({modal}),
+                                linkTo:'instruments'
+                            }}/>
                         )}
                     </Col>
                 </Row>
+                {modal && (
+                    <Modal isOpen>
+                        <ModalHeader>
+                            Te vo a borrar
+                        </ModalHeader>
+                        <ModalBody>
+                            Confirme Accion {modal.family}  {modal.instrument}
+                        </ModalBody>
+                        <ModalFooter>
+                            <ButtonGroup>
+                                <Button color="warning" onClick={() => {
+                                    this.props.deleteInstrument(modal.id)
+                                    this.setState({modal: null})
+                                }} >
+                                    Aceptar
+                                </Button>
+                                <Button color="info" onClick={() => this.setState({modal: null})}>
+                                    Cancelar
+                                </Button>
+                            </ButtonGroup>
+                        </ModalFooter>
+                    </Modal>
+                )}
             </Container>
         )
     }
 }
 
-const mapStateToProps = (state /* nuestro Store */, ownProps /*  */) => {
-    const { documents: { instruments,limit, total, loading }, tableProps } = state.instrument;
+const mapStateToProps = (state /* nuestro Store */, ownProps /*  */ ) => {
+    const {documents: {instruments, limit, total, loading}, tableProps} = state.instrument;
     return {
         tableProps,
         instruments,
@@ -80,7 +123,8 @@ const mapStateToProps = (state /* nuestro Store */, ownProps /*  */) => {
 
 const mapDispatchToProps = (dispatch /* acciones a disparar */, ownProps /*  */ ) => ({
     getInstruments: filters => dispatch(fetchInstrumentsRequested(filters)),
-    onSort: sort => dispatch(sortInstrument(sort))
+    onSort: sort => dispatch(sortInstrument(sort)),
+    deleteInstrument: id => dispatch(deleteInstrumentRequested(id))
 })
 
 export default connect(

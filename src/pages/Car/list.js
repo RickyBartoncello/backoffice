@@ -1,6 +1,7 @@
-import React, { PureComponent } from 'react';
+import React, {PureComponent} from 'react';
 import Table from '../../components/table';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import {
     Container,
     Button,
@@ -15,10 +16,10 @@ import {
 } from 'reactstrap';
 
 import {
-    fetchCountriesRequested,
-    sortCountry,
-    deleteCountryRequested
-} from '../../actions/country'
+    fetchCarsRequested,
+    sortCar,
+    deleteCarRequested
+} from '../../actions/car'
 
 class App extends PureComponent {
     constructor(props) {
@@ -28,16 +29,16 @@ class App extends PureComponent {
         };
     }
     componentDidMount() {
-        this.props.getCountries();
+        this.props.getCars();
     }
 
     handlePagination = (skip) => {
-        this.props.getCountries({ skip });
-    }
+        this.props.getCars({skip});
+    } 
 
     render() {
         const {
-            countries,
+            cars,
             limit,
             total,
             tableProps,
@@ -45,15 +46,18 @@ class App extends PureComponent {
             loading
         } = this.props;
 
-        const { modal } = this.state;
+        const {modal} = this.state;
         return (
             <Container>
                 <Row>
                     <Col>
                         <h3>Tabla de datos </h3>
                     </Col>
+                    <Col sm="3">
+                        <Button color="primary" tag={Link} to="/cars/edit/new"> Nuevo </Button>
+                    </Col>
                 </Row>
-                <hr />
+                <hr/>
                 <Row>
                     <Col>
                         {loading && (
@@ -61,15 +65,15 @@ class App extends PureComponent {
                         )}
                         {!loading && (
                             <Table {...{
-                                data: countries,
+                                data: cars,
                                 ...tableProps,
                                 onSort,
                                 limit,
                                 total,
                                 onPageClick: this.handlePagination,
-                                onDelete: modal => this.setState({ modal }),
-                                linkTo: 'country'
-                            }} />
+                                onDelete: modal => this.setState({modal}),
+                                linkTo: 'cars'
+                            }}/>
                         )}
                     </Col>
                 </Row>
@@ -79,17 +83,17 @@ class App extends PureComponent {
                             Te vo a borrar
                         </ModalHeader>
                         <ModalBody>
-                            Confirme Accion {modal.name}  {modal.code} {modal.createdAt}
+                            Confirme Accion {modal.brand}  {modal.model} {modal.year}
                         </ModalBody>
                         <ModalFooter>
                             <ButtonGroup>
                                 <Button color="warning" onClick={() => {
-                                    this.props.deleteCountry(modal.id)
-                                    this.setState({ modal: null })
+                                    this.props.deleteCar(modal.id)
+                                    this.setState({modal: null})
                                 }} >
                                     Aceptar
                                 </Button>
-                                <Button color="info" onClick={() => this.setState({ modal: null })}>
+                                <Button color="info" onClick={() => this.setState({modal: null})}>
                                     Cancelar
                                 </Button>
                             </ButtonGroup>
@@ -101,21 +105,21 @@ class App extends PureComponent {
     }
 }
 
-const mapStateToProps = (state /* nuestro Store */, ownProps /*  */) => {
-    const { documents: { countries, limit, total, loading }, tableProps } = state.country;
+const mapStateToProps = (state /* nuestro Store */, ownProps /*  */ ) => {
+    const {documents: {cars, limit, total, loading}, tableProps} = state.car;
     return {
         tableProps,
-        countries,
+        cars,
         limit,
         total,
         loading
     };
 }
 
-const mapDispatchToProps = (dispatch /* acciones a disparar */, ownProps /*  */) => ({
-    getCountries: filters => dispatch(fetchCountriesRequested(filters)),
-    onSort: sort => dispatch(sortCountry(sort)),
-    deleteCountry: id => dispatch(deleteCountryRequested(id))
+const mapDispatchToProps = (dispatch /* acciones a disparar */, ownProps /*  */ ) => ({
+    getCars: filters => dispatch(fetchCarsRequested(filters)),
+    onSort: sort => dispatch(sortCar(sort)),
+    deleteCar: id => dispatch(deleteCarRequested(id))
 })
 
 export default connect(

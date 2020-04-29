@@ -1,5 +1,13 @@
-import React, { PureComponent } from 'react';
-import { Link } from 'react-router-dom';
+import set from 'lodash/set';
+
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import {
+    submitInstrumentDataRequested,
+    fetchInstrumentRequested,
+    updateInstrumentData
+} from '../../actions/instrument'
 
 import {
     Container,
@@ -12,74 +20,80 @@ import {
     Input
 } from 'reactstrap';
 
-class Edit extends PureComponent {
-    constructor(props) {
-        super(props);
-        this.state = {
-            stateFamily: '',
-            stateInstrument: '',
-            stateCreatedAt: ''
-        };
+
+
+const Instrument = (props) => {
+    console.log(props);
+    const dispatch = useDispatch();
+    const { id } = useParams();
+    const { instrument } = useSelector(state => state.instrument.documents);
+    console.log(instrument)
+    const [title, setTitle] = useState('Nuevo instrumentro');
+    const submit = () => {
+        dispatch(submitInstrumentDataRequested())
+    }
+    console.log(id, instrument);
+    useEffect(
+        () => {
+            if (id && id.includes('-') && (id.match(/-/g) || []).length === 4) {
+                dispatch(fetchInstrumentRequested(id));
+                setTitle('Edición del instrumento')
+            }
+        }, [dispatch, id]);
+
+
+
+    const handleChange = (value, path) => {
+        set(instrument, path, value);
+        dispatch(updateInstrumentData(instrument)
+        )
     }
 
-    handleChange(value, property) {
-        this.setState(
-            () => ({ [property]: value })
-        );
-    }
 
-    render() {
-        const {
-            family,
-            instrument
-        } = this.props;
 
-        const {
-            stateFamily,
-            stateInstrument
-        } = this.state;
+    return (
+        <Container fluid>
+            <Form onSubmit={() => submit()}>
+                <h3 sm={5}>{title}</h3>
+                <Row form>
+                    <Col>
+                        <FormGroup>
+                            <Label for="exampleFamily">Familia</Label>
+                            <Input
+                                type="text"
+                                name="family"
+                                id="exampleFamily"
+                                placeholder="ingrese la familia"
+                                onChange={({ target: { value } }) => handleChange(value, 'family')}
+                                value={instrument.family}
+                            />
+                        </FormGroup>
+                    </Col>
+                    <Col>
+                        <FormGroup>
+                            <Label for="exampleInstrument">Instrumento</Label>
+                            <Input
+                                type="text"
+                                name="instrument"
+                                id="exampleInstrument"
+                                placeholder="ingrese el instrumento"
+                                onChange={({ target: { value } }) => handleChange(value, 'instrument')}
+                                value={instrument.instrument}
+                            />
+                        </FormGroup>
+                    </Col>
+                </Row>
+                <Row form>
+                    <Col>
+                        <Button onClick={() => submit()}
+                            color="primary"
+                            className="badge-pill"
+                        > Guardar </Button>
+                    </Col>
+                </Row>
+            </Form>
+        </Container>
+    )
+};
 
-        return (
-            <Container fluid>
-                <Form>
-                    <FormGroup>
-                        <Label for="family">Familia: </Label>
-                        <Input
-                            key="family"
-                            type="text"
-                            family="family"
-                            id="family"
-                            placeholder="Escribe la Familia del Instrumento"
-                            value={stateFamily}
-                            onChange={
-                                ({ target: { value } }) => this.handleChange(value, 'stateFamily')
-                            }
-                            required
-                        />
-                    </FormGroup>
-                    <FormGroup>
-                        <Label for="instrument">Instrumento: </Label>
-                        <Input
-                            key="instrument"
-                            type="text"
-                            family="instrument"
-                            id="instrument"
-                            placeholder="Escribe el Nombre del Instrumento"
-                            value={stateInstrument}
-                            onChange={
-                                ({ target: { value } }) => this.handleChange(value, 'stateInstrument')
-                            }
-                            required
-                        />
-                    </FormGroup>
-                    <Button
-                    tag={Link} color="primary" classfamily="badge-pill" to={`../instruments`} >
-                        Enviar Modificacion
-                    </Button>
-                </Form>
-            </Container>
-        );
-    }
-}
-
-export default Edit;
+export default Instrument;

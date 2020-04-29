@@ -1,4 +1,4 @@
-import Http from '.';
+import Http from '.';//estoy viedo mi index
 
 const API = 'api/cars';
 
@@ -8,21 +8,21 @@ class Car {
         const filterObj = new URLSearchParams(filters).toString();
         return Http.get(`${API}?${filterObj}`);
     }
-<<<<<<< HEAD
 
-    static fetchCar(id) {
-        console.log(id);
+    static save(props) {
+        if (props.id) {
+            return Http.put(`${API}/${props.id}`, props);
+        }
+        return Http.post(API, props);
+    }
+
+    static getOne(id) {
         return Http.get(`${API}/${id}`);
     }
 
-=======
->>>>>>> 01dc7665da9634571f1432fcf697ecf4fa836648
-    static submitCar(car) {
-        if (!car.id) {
-            return Http.post(API, { ...car });
-        }
-        return Http.put(`${API}/${car.id}`, { ...car });
+    static delete(id) {
+        return Http.delete(`${API}/${id}`);
     }
 }
 
-export default Car
+export default Car;
